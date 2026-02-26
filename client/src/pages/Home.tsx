@@ -49,23 +49,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Helmet>
+      <Helmet prioritizeSeoTags>
         <title>Kaax AI - Vende más con Agentes Inteligentes</title>
-        <meta name="description" content="Aumenta tus ventas con agentes inteligentes. Identifica leads calificados y atiende 24/7 con Kaax AI." />
+        <meta name="title" content="Kaax AI - Vende más con Agentes Inteligentes" />
+        <meta name="description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA que atiende 24/7." />
         
         {/* Open Graph / Facebook / WhatsApp */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
+        <meta property="og:url" content="https://kaax.ai/" />
         <meta property="og:title" content="Kaax AI - Vende más con Agentes Inteligentes" />
-        <meta property="og:description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA." />
-        <meta property="og:image" content="https://kaax-ai.replit.app/og-image.png" />
+        <meta property="og:description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA que atiende 24/7." />
+        <meta property="og:image" content="https://kaax.ai/og-image.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={window.location.href} />
+        <meta property="twitter:url" content="https://kaax.ai/" />
         <meta property="twitter:title" content="Kaax AI - Vende más con Agentes Inteligentes" />
-        <meta property="twitter:description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA." />
-        <meta property="twitter:image" content="https://kaax-ai.replit.app/og-image.png" />
+        <meta property="twitter:description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA que atiende 24/7." />
+        <meta property="twitter:image" content="https://kaax.ai/og-image.png" />
       </Helmet>
 
       <Navbar />

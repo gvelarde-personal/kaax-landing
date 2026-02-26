@@ -4,7 +4,7 @@ import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
-import { stripe, STRIPE_PRICE_ID, STRIPE_PUBLIC_KEY, isTestMode } from "./stripe";
+import { stripe, STRIPE_PRICE_ID, STRIPE_PUBLIC_KEY, isTestMode, isProd } from "./stripe";
 import express from "express";
 
 export async function registerRoutes(
@@ -55,7 +55,9 @@ export async function registerRoutes(
     express.raw({ type: "application/json" }),
     async (req, res) => {
       const sig = req.headers["stripe-signature"] as string;
-      const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+      const webhookSecret = isProd
+        ? process.env.STRIPE_WEBHOOK_SECRET_PROD
+        : process.env.STRIPE_WEBHOOK_SECRET;
 
       let event: any;
       try {

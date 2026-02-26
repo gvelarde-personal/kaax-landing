@@ -99,11 +99,11 @@ export default function Home() {
           >
             <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-8">
               <Sparkles className="w-4 h-4" />
-              <span>Esencia de la Selva & IA</span>
+              <span>Vende más, más rápido</span>
             </motion.div>
             
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-8 leading-tight text-foreground">
-              Conecta con el espíritu de tu negocio mediante <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent text-glow">inteligencia ancestral.</span>
+              Aumenta tus ventas con <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent text-glow">agentes inteligentes.</span>
             </motion.h1>
             
             <motion.p variants={fadeIn} className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">

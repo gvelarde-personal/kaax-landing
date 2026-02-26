@@ -86,8 +86,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
         {/* Background Effects */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] opacity-50 pointer-events-none" />
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] opacity-40 pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
@@ -98,11 +98,11 @@ export default function Home() {
           >
             <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-8">
               <Sparkles className="w-4 h-4" />
-              <span>Agentes de IA de Próxima Generación</span>
+              <span>Esencia de la Selva & IA</span>
             </motion.div>
             
-            <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-8 leading-tight">
-              Automatiza tu embudo de ventas con <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400 text-glow">agentes inteligentes.</span>
+            <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-8 leading-tight text-foreground">
+              Conecta con el espíritu de tu negocio mediante <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent text-glow">inteligencia ancestral.</span>
             </motion.h1>
             
             <motion.p variants={fadeIn} className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">

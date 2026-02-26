@@ -5,51 +5,52 @@
 @tailwind utilities;
 
 :root {
-  /* Enforcing a stunning dark-mode-first aesthetic for the AI B2B vibe */
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Outfit', sans-serif;
+    /* Mayan Jungle Palette */
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Outfit', sans-serif;
 
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+    --background: 140 25% 4.5%;
+    --foreground: 70 20% 95%;
 
-  --card: 240 10% 5%;
-  --card-foreground: 0 0% 98%;
+    --card: 140 25% 6%;
+    --card-foreground: 70 20% 95%;
 
-  --popover: 240 10% 5%;
-  --popover-foreground: 0 0% 98%;
+    --popover: 140 25% 6%;
+    --popover-foreground: 70 20% 95%;
 
-  /* Primary: Electric Indigo */
-  --primary: 250 84% 54%;
-  --primary-foreground: 210 40% 98%;
+    /* Primary: Vibrant Mayan Green / Jade */
+    --primary: 142 76% 45%;
+    --primary-foreground: 140 25% 4.5%;
 
-  /* Secondary: Deep subtle blue/gray */
-  --secondary: 240 15% 12%;
-  --secondary-foreground: 0 0% 98%;
+    /* Secondary: Earthy Brown / Clay */
+    --secondary: 25 30% 12%;
+    --secondary-foreground: 70 20% 95%;
 
-  --muted: 240 15% 12%;
-  --muted-foreground: 240 5% 64.9%;
+    --muted: 140 15% 12%;
+    --muted-foreground: 140 10% 60%;
 
-  --accent: 250 84% 54%;
-  --accent-foreground: 0 0% 98%;
+    /* Accent: Ancient Gold / Sun */
+    --accent: 45 90% 50%;
+    --accent-foreground: 140 25% 4.5%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-  --border: 240 15% 15%;
-  --input: 240 15% 15%;
-  --ring: 250 84% 54%;
+    --border: 140 20% 15%;
+    --input: 140 20% 15%;
+    --ring: 142 76% 45%;
 
-  --sidebar-background: 240 10% 3.9%;
-  --sidebar-foreground: 240 4.8% 95.9%;
-  --sidebar-primary: 250 84% 54%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 15% 15%;
-  --sidebar-accent-foreground: 240 4.8% 95.9%;
-  --sidebar-border: 240 15% 15%;
-  --sidebar-ring: 250 84% 54%;
+    --sidebar-background: 140 25% 4.5%;
+    --sidebar-foreground: 140 10% 90%;
+    --sidebar-primary: 142 76% 45%;
+    --sidebar-primary-foreground: 140 25% 4.5%;
+    --sidebar-accent: 140 20% 15%;
+    --sidebar-accent-foreground: 140 10% 90%;
+    --sidebar-border: 140 20% 15%;
+    --sidebar-ring: 142 76% 45%;
 
-  --radius: 0.75rem;
-}
+    --radius: 0.75rem;
+  }
 
 @layer base {
   * {

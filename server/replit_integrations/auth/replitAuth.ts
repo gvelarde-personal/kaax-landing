@@ -66,6 +66,20 @@ export async function setupAuth(app: Express) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Middleware to expose Replit Auth user ID as a header for compatibility
+  app.use((req, res, next) => {
+    if (req.isAuthenticated() && req.user) {
+      const user = req.user as any;
+      if (user.claims && user.claims.sub) {
+        req.headers["x-replit-user-id"] = user.claims.sub;
+      }
+    } else {
+      // Allow /api/leads POST (create) without auth if needed for the landing page
+      // but the current setup in routes.ts checks for this header on GET/PUT/DELETE
+    }
+    next();
+  });
+
   const config = await getOidcConfig();
 
   const verify: VerifyFunction = async (

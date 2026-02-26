@@ -14,10 +14,15 @@ export async function registerRoutes(
   
   app.get(api.leads.list.path, async (req, res) => {
     try {
+      const isDev = process.env.NODE_ENV === "development";
       const replitUser = req.headers["x-replit-user-id"];
-      if (!replitUser) {
+      
+      // In development, if not logged in, we can still show leads for testing
+      // but in production, we strictly require auth
+      if (!replitUser && !isDev) {
         return res.status(401).json({ message: "No autorizado" });
       }
+      
       const allLeads = await storage.getLeads();
       res.status(200).json(allLeads);
     } catch (err) {
@@ -27,8 +32,9 @@ export async function registerRoutes(
 
   app.get(api.leads.get.path, async (req, res) => {
     try {
+      const isDev = process.env.NODE_ENV === "development";
       const replitUser = req.headers["x-replit-user-id"];
-      if (!replitUser) {
+      if (!replitUser && !isDev) {
         return res.status(401).json({ message: "No autorizado" });
       }
       const id = parseInt(req.params.id);
@@ -63,8 +69,9 @@ export async function registerRoutes(
 
   app.put(api.leads.update.path, async (req, res) => {
     try {
+      const isDev = process.env.NODE_ENV === "development";
       const replitUser = req.headers["x-replit-user-id"];
-      if (!replitUser) {
+      if (!replitUser && !isDev) {
         return res.status(401).json({ message: "No autorizado" });
       }
       const id = parseInt(req.params.id);
@@ -93,8 +100,9 @@ export async function registerRoutes(
 
   app.delete(api.leads.delete.path, async (req, res) => {
     try {
+      const isDev = process.env.NODE_ENV === "development";
       const replitUser = req.headers["x-replit-user-id"];
-      if (!replitUser) {
+      if (!replitUser && !isDev) {
         return res.status(401).json({ message: "No autorizado" });
       }
       const id = parseInt(req.params.id);

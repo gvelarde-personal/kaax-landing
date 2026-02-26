@@ -106,13 +106,13 @@ export default function Home() {
               Aumenta tus ventas con <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-emerald-400 to-accent text-glow">agentes inteligentes.</span>
             </motion.h1>
             
-            <motion.p variants={fadeIn} className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+            <motion.p variants={fadeIn} className="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
               Identifica leads calificados, interactúa con ellos al instante y cierra más acuerdos con un sistema CRM impulsado por IA que atiende 24/7.
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#capture" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-glow hover-elevate">
+                <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-[#22C55E] hover:bg-[#1ea34d] text-white font-bold shadow-[0_0_20px_rgba(34,197,94,0.3)] hover-elevate border-none">
                   Empezar a Capturar Leads
                 </Button>
               </a>

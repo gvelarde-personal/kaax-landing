@@ -102,20 +102,39 @@ export async function setupAuth(app: Express) {
   passport.serializeUser((user: Express.User, cb) => cb(null, user));
   passport.deserializeUser((user: Express.User, cb) => cb(null, user));
 
-  app.get("/api/login", (req, res, next) => {
+  app.get("/api/login", (req: any, res, next) => {
     ensureStrategy(req.hostname);
+    const redirectUrl = req.query.redirect_url as string;
+    const state = redirectUrl 
+      ? Buffer.from(JSON.stringify({ redirect_url: redirectUrl })).toString('base64')
+      : undefined;
+    
     passport.authenticate(`replitauth:${req.hostname}`, {
       prompt: "login consent",
       scope: ["openid", "email", "profile", "offline_access"],
+      state,
     })(req, res, next);
   });
 
-  app.get("/api/callback", (req, res, next) => {
+  app.get("/api/callback", (req: any, res, next) => {
     ensureStrategy(req.hostname);
     passport.authenticate(`replitauth:${req.hostname}`, {
-      successReturnToOrRedirect: "/",
       failureRedirect: "/api/login",
-    })(req, res, next);
+    })(req, res, (err: any) => {
+      if (err) return next(err);
+      let redirectUrl = "/";
+      try {
+        if (req.query.state) {
+          const stateData = JSON.parse(Buffer.from(req.query.state as string, 'base64').toString());
+          if (stateData && stateData.redirect_url) {
+            redirectUrl = stateData.redirect_url;
+          }
+        }
+      } catch (e) {
+        console.error("Error parsing auth state:", e);
+      }
+      res.redirect(redirectUrl);
+    });
   });
 
   app.get("/api/logout", (req, res) => {

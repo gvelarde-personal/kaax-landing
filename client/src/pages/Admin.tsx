@@ -29,7 +29,7 @@ function useReplitAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/_replauth")
+    fetch("/api/auth/user")
       .then(res => {
         if (res.status === 401) return null;
         return res.json();
@@ -111,7 +111,7 @@ export default function Admin() {
           El panel de administración es privado. Por favor, inicia sesión con tu cuenta de Replit para continuar.
         </p>
         <Button 
-          onClick={() => window.location.href = `/_replauth?redirect_url=${window.location.href}`}
+          onClick={() => window.location.href = `/api/login?redirect_url=${window.location.href}`}
           className="bg-primary hover:bg-primary/90 h-12 px-8 text-white font-bold"
         >
           <LogIn className="w-4 h-4 mr-2" /> Iniciar Sesión con Replit

@@ -59,26 +59,26 @@ export default function Home() {
           >
             <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-8">
               <Sparkles className="w-4 h-4" />
-              <span>Next-Gen AI Sales Agents</span>
+              <span>Agentes de IA de Próxima Generación</span>
             </motion.div>
             
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-8 leading-tight">
-              Automate your sales funnel with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400 text-glow">intelligent agents.</span>
+              Automatiza tu embudo de ventas con <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400 text-glow">agentes inteligentes.</span>
             </motion.h1>
             
             <motion.p variants={fadeIn} className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              Identify qualified leads, engage them instantly, and close more deals with a 24/7 AI-powered CRM system that never sleeps.
+              Identifica leads calificados, interactúa con ellos al instante y cierra más acuerdos con un sistema CRM impulsado por IA que atiende 24/7.
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#capture" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-glow hover-elevate">
-                  Start Capturing Leads
+                  Empezar a Capturar Leads
                 </Button>
               </a>
               <a href="#features" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border-white/10 hover:bg-white/5">
-                  View Features
+                  Ver Funciones
                 </Button>
               </a>
             </motion.div>
@@ -90,8 +90,8 @@ export default function Home() {
       <section id="features" className="py-24 bg-zinc-950 border-y border-white/5 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Unfair Advantage.</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Equip your team with tools that turn cold traffic into ready-to-close pipeline automatically.</p>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Ventaja Competitiva.</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Equipa a tu equipo con herramientas que convierten el tráfico frío en oportunidades de venta automáticamente.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -99,24 +99,24 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Zap className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-3 font-display">Instant Qualification</h3>
-              <p className="text-muted-foreground leading-relaxed">AI analyzes incoming prospects instantly, separating noise from high-intent buyers so you focus on what matters.</p>
+              <h3 className="text-xl font-bold mb-3 font-display">Calificación Instantánea</h3>
+              <p className="text-muted-foreground leading-relaxed">La IA analiza a los prospectos al instante, separando el ruido de los compradores con alta intención para que te enfoques en lo que importa.</p>
             </div>
             
             <div className="glass-card p-8 rounded-2xl hover-elevate group">
               <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Clock className="w-6 h-6 text-purple-400" />
               </div>
-              <h3 className="text-xl font-bold mb-3 font-display">24/7 Availability</h3>
-              <p className="text-muted-foreground leading-relaxed">Engage users the moment they show interest, regardless of time zone. Speed to lead is your new superpower.</p>
+              <h3 className="text-xl font-bold mb-3 font-display">Disponibilidad 24/7</h3>
+              <p className="text-muted-foreground leading-relaxed">Atiende a los usuarios en el momento en que muestran interés, sin importar la zona horaria. La velocidad de respuesta es tu nuevo superpoder.</p>
             </div>
             
             <div className="glass-card p-8 rounded-2xl hover-elevate group">
               <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <BarChart3 className="w-6 h-6 text-emerald-400" />
               </div>
-              <h3 className="text-xl font-bold mb-3 font-display">Actionable Insights</h3>
-              <p className="text-muted-foreground leading-relaxed">Comprehensive dashboarding to track conversion rates, pipeline velocity, and team performance metrics.</p>
+              <h3 className="text-xl font-bold mb-3 font-display">Información Valiosa</h3>
+              <p className="text-muted-foreground leading-relaxed">Panel de control completo para rastrear tasas de conversión, velocidad del embudo y métricas de rendimiento del equipo.</p>
             </div>
           </div>
         </div>
@@ -127,21 +127,21 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Ready to scale your sales?</h2>
-              <p className="text-xl text-muted-foreground mb-8">Join top-tier tech companies using AgentFlow to supercharge their go-to-market motion.</p>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">¿Listo para escalar tus ventas?</h2>
+              <p className="text-xl text-muted-foreground mb-8">Únete a las empresas tecnológicas que utilizan Kaax AI para potenciar su crecimiento.</p>
               
               <ul className="space-y-4 mb-10">
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="w-6 h-6 text-primary" />
-                  <span className="text-lg">Setup in under 5 minutes</span>
+                  <span className="text-lg text-zinc-200">Configuración en menos de 5 minutos</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="w-6 h-6 text-primary" />
-                  <span className="text-lg">Seamless CRM integrations</span>
+                  <span className="text-lg text-zinc-200">Integración fluida con CRMs</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="w-6 h-6 text-primary" />
-                  <span className="text-lg">Customizable AI behaviors</span>
+                  <span className="text-lg text-zinc-200">Comportamientos de IA personalizables</span>
                 </li>
               </ul>
             </div>
@@ -158,20 +158,20 @@ export default function Home() {
                   <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
                     <Target className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-3xl font-display font-bold mb-4">Request Received!</h3>
-                  <p className="text-muted-foreground mb-8 text-lg">Our AI agent has already processed your details. We'll be in touch shortly.</p>
-                  <Button variant="outline" onClick={() => setIsSubmitted(false)} className="border-white/10">
-                    Submit Another
+                  <h3 className="text-3xl font-display font-bold mb-4 text-white">¡Solicitud Recibida!</h3>
+                  <p className="text-muted-foreground mb-8 text-lg">Nuestro agente de IA ya ha procesado tus datos. Nos pondremos en contacto contigo pronto.</p>
+                  <Button variant="outline" onClick={() => setIsSubmitted(false)} className="border-white/10 text-white">
+                    Enviar Otro
                   </Button>
                 </motion.div>
               ) : (
                 <form onSubmit={form.handleSubmit(onSubmit)} className="relative z-10 space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-zinc-300">Full Name</Label>
+                    <Label htmlFor="name" className="text-zinc-300">Nombre Completo</Label>
                     <Input 
                       id="name" 
-                      placeholder="Jane Doe" 
-                      className="bg-black/50 border-white/10 focus-visible:border-primary h-12"
+                      placeholder="Juan Pérez" 
+                      className="bg-black/50 border-white/10 focus-visible:border-primary h-12 text-white"
                       {...form.register("name")}
                     />
                     {form.formState.errors.name && (
@@ -180,12 +180,12 @@ export default function Home() {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-zinc-300">Work Email</Label>
+                    <Label htmlFor="email" className="text-zinc-300">Correo Electrónico</Label>
                     <Input 
                       id="email" 
                       type="email" 
-                      placeholder="jane@company.com" 
-                      className="bg-black/50 border-white/10 focus-visible:border-primary h-12"
+                      placeholder="juan@empresa.com" 
+                      className="bg-black/50 border-white/10 focus-visible:border-primary h-12 text-white"
                       {...form.register("email")}
                     />
                     {form.formState.errors.email && (
@@ -195,20 +195,20 @@ export default function Home() {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="company" className="text-zinc-300">Company (Optional)</Label>
+                      <Label htmlFor="company" className="text-zinc-300">Empresa (Opcional)</Label>
                       <Input 
                         id="company" 
                         placeholder="Acme Inc" 
-                        className="bg-black/50 border-white/10 focus-visible:border-primary h-12"
+                        className="bg-black/50 border-white/10 focus-visible:border-primary h-12 text-white"
                         {...form.register("company")}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-zinc-300">Phone (Optional)</Label>
+                      <Label htmlFor="phone" className="text-zinc-300">Teléfono (Opcional)</Label>
                       <Input 
                         id="phone" 
-                        placeholder="+1 (555) 000-0000" 
-                        className="bg-black/50 border-white/10 focus-visible:border-primary h-12"
+                        placeholder="+52 (55) 0000-0000" 
+                        className="bg-black/50 border-white/10 focus-visible:border-primary h-12 text-white"
                         {...form.register("phone")}
                       />
                     </div>
@@ -219,7 +219,7 @@ export default function Home() {
                     className="w-full h-14 text-lg mt-4 bg-primary hover:bg-primary/90 text-white"
                     disabled={isPending}
                   >
-                    {isPending ? "Processing..." : "Get Priority Access"}
+                    {isPending ? "Procesando..." : "Obtener Acceso Prioritario"}
                   </Button>
                 </form>
               )}
@@ -231,9 +231,9 @@ export default function Home() {
       <footer className="border-t border-white/5 py-12 text-center text-zinc-500">
         <div className="flex items-center justify-center gap-2 mb-4">
           <Bot className="w-5 h-5" />
-          <span className="font-display font-semibold text-white">AgentFlow</span>
+          <span className="font-display font-semibold text-white">Kaax AI</span>
         </div>
-        <p>© 2024 AgentFlow Inc. All rights reserved.</p>
+        <p>© 2024 Kaax AI. Todos los derechos reservados.</p>
       </footer>
     </div>
   );

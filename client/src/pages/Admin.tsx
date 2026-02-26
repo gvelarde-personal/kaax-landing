@@ -22,12 +22,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-const STATUS_COLORS: Record<string, string> = {
-  new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  contacted: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
-  qualified: "bg-green-500/10 text-green-400 border-green-500/20",
-  lost: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
-};
+  const STATUS_LABELS: Record<string, string> = {
+    new: "Nuevo",
+    contacted: "Contactado",
+    qualified: "Calificado",
+    lost: "Perdido",
+  };
+
+  const STATUS_COLORS: Record<string, string> = {
+    new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    contacted: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+    qualified: "bg-green-500/10 text-green-400 border-green-500/20",
+    lost: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
+  };
 
 export default function Admin() {
   const { data: leads = [], isLoading } = useLeads();
@@ -80,7 +87,7 @@ export default function Admin() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Bot className="w-5 h-5 text-white" />
               </div>
-              <span className="font-display font-bold text-lg tracking-tight">AgentFlow</span>
+              <span className="font-display font-bold text-lg tracking-tight">Kaax AI</span>
             </Link>
           </div>
           <nav className="flex-1 p-4 space-y-2">
@@ -101,10 +108,10 @@ export default function Admin() {
 
         <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <header className="h-20 flex items-center justify-between px-8 border-b border-white/5 bg-zinc-950/50">
-            <h1 className="text-xl font-display font-semibold">Lead Management</h1>
+            <h1 className="text-xl font-display font-semibold">Gestión de Leads</h1>
             <div className="flex items-center gap-4">
               <Link href="/">
-                <Button variant="outline" size="sm" className="border-white/10">View Landing Page</Button>
+                <Button variant="outline" size="sm" className="border-white/10">Ver Landing Page</Button>
               </Link>
             </div>
           </header>
@@ -113,7 +120,7 @@ export default function Admin() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <Card className="bg-white/5 border-white/5 shadow-none">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Captured</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Capturados</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-display font-bold">{totalLeads}</div>
@@ -121,7 +128,7 @@ export default function Admin() {
               </Card>
               <Card className="bg-white/5 border-white/5 shadow-none">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Needs Attention</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Necesitan Atención</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-display font-bold text-blue-400">{newLeads}</div>
@@ -129,7 +136,7 @@ export default function Admin() {
               </Card>
               <Card className="bg-white/5 border-white/5 shadow-none">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Qualified</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Calificados</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-3xl font-display font-bold text-green-400">{qualifiedLeads}</div>
@@ -151,11 +158,11 @@ export default function Admin() {
                 <Table>
                   <TableHeader className="bg-white/5">
                     <TableRow className="border-white/5 hover:bg-transparent">
-                      <TableHead className="font-medium text-zinc-400">Prospect</TableHead>
-                      <TableHead className="font-medium text-zinc-400">Contact</TableHead>
-                      <TableHead className="font-medium text-zinc-400">Status</TableHead>
-                      <TableHead className="font-medium text-zinc-400">Received</TableHead>
-                      <TableHead className="text-right font-medium text-zinc-400">Actions</TableHead>
+                      <TableHead className="font-medium text-zinc-400">Prospecto</TableHead>
+                      <TableHead className="font-medium text-zinc-400">Contacto</TableHead>
+                      <TableHead className="font-medium text-zinc-400">Estado</TableHead>
+                      <TableHead className="font-medium text-zinc-400">Recibido</TableHead>
+                      <TableHead className="text-right font-medium text-zinc-400">Acciones</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -163,7 +170,7 @@ export default function Admin() {
                       <TableRow key={lead.id} className="border-white/5 hover:bg-white/5 transition-colors">
                         <TableCell>
                           <div className="font-medium">{lead.name}</div>
-                          <div className="text-xs text-muted-foreground">{lead.company || "No Company"}</div>
+                          <div className="text-xs text-muted-foreground">{lead.company || "Sin Empresa"}</div>
                         </TableCell>
                         <TableCell>
                           <div className="text-sm">{lead.email}</div>
@@ -171,11 +178,11 @@ export default function Admin() {
                         </TableCell>
                         <TableCell>
                           <Badge variant="outline" className={`capitalize ${STATUS_COLORS[lead.status] || STATUS_COLORS.new}`}>
-                            {lead.status}
+                            {STATUS_LABELS[lead.status] || lead.status}
                           </Badge>
                         </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
-                          {lead.createdAt ? format(new Date(lead.createdAt), "MMM d, h:mm a") : "Unknown"}
+                          {lead.createdAt ? format(new Date(lead.createdAt), "d MMM, h:mm a") : "Desconocido"}
                         </TableCell>
                         <TableCell className="text-right">
                           <DropdownMenu>
@@ -184,12 +191,12 @@ export default function Admin() {
                                 <MoreHorizontal className="w-4 h-4" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="bg-zinc-900 border-white/10">
+                            <DropdownMenuContent align="end" className="bg-zinc-900 border-white/10 text-white">
                               <DropdownMenuItem onClick={() => openEdit(lead)} className="cursor-pointer hover:bg-white/10">
-                                <Edit className="w-4 h-4 mr-2" /> Update Status
+                                <Edit className="w-4 h-4 mr-2" /> Actualizar Estado
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={() => setDeletingLead(lead)} className="cursor-pointer text-destructive focus:bg-destructive/10 focus:text-destructive">
-                                <Trash2 className="w-4 h-4 mr-2" /> Delete Lead
+                                <Trash2 className="w-4 h-4 mr-2" /> Eliminar Lead
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -208,43 +215,43 @@ export default function Admin() {
       <Dialog open={!!editingLead} onOpenChange={(open) => !open && setEditingLead(null)}>
         <DialogContent className="bg-zinc-950 border-white/10 text-foreground sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Update Lead</DialogTitle>
+            <DialogTitle className="text-white">Actualizar Lead</DialogTitle>
             <DialogDescription className="text-muted-foreground">
-              Update pipeline status and internal notes for {editingLead?.name}.
+              Actualiza el estado del embudo y notas internas para {editingLead?.name}.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={editForm.handleSubmit(onEditSubmit)} className="space-y-6 pt-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-zinc-300">Status</label>
+              <label className="text-sm font-medium text-zinc-300">Estado</label>
               <Select 
                 value={editForm.watch("status")} 
                 onValueChange={(val) => editForm.setValue("status", val)}
               >
-                <SelectTrigger className="bg-black/50 border-white/10">
-                  <SelectValue placeholder="Select status" />
+                <SelectTrigger className="bg-black/50 border-white/10 text-white">
+                  <SelectValue placeholder="Seleccionar estado" />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-white/10">
-                  <SelectItem value="new">New</SelectItem>
-                  <SelectItem value="contacted">Contacted</SelectItem>
-                  <SelectItem value="qualified">Qualified</SelectItem>
-                  <SelectItem value="lost">Lost</SelectItem>
+                <SelectContent className="bg-zinc-900 border-white/10 text-white">
+                  <SelectItem value="new">Nuevo</SelectItem>
+                  <SelectItem value="contacted">Contactado</SelectItem>
+                  <SelectItem value="qualified">Calificado</SelectItem>
+                  <SelectItem value="lost">Perdido</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-zinc-300">Internal Notes</label>
+              <label className="text-sm font-medium text-zinc-300">Notas Internas</label>
               <Textarea 
-                placeholder="Met at conference, looking for Q3 deployment..."
-                className="bg-black/50 border-white/10 min-h-[100px] resize-none"
+                placeholder="Escribe notas aquí..."
+                className="bg-black/50 border-white/10 min-h-[100px] resize-none text-white"
                 {...editForm.register("notes")}
               />
             </div>
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => setEditingLead(null)} className="border-white/10 hover:bg-white/5">
-                Cancel
+              <Button type="button" variant="outline" onClick={() => setEditingLead(null)} className="border-white/10 hover:bg-white/5 text-white">
+                Cancelar
               </Button>
               <Button type="submit" className="bg-primary hover:bg-primary/90 text-white" disabled={isUpdating}>
-                {isUpdating ? <Loader2 className="w-4 h-4 animate-spin" /> : "Save Changes"}
+                {isUpdating ? <Loader2 className="w-4 h-4 animate-spin" /> : "Guardar Cambios"}
               </Button>
             </DialogFooter>
           </form>
@@ -256,18 +263,18 @@ export default function Admin() {
         <DialogContent className="bg-zinc-950 border-white/10 text-foreground sm:max-w-[400px]">
           <DialogHeader>
             <DialogTitle className="text-destructive flex items-center gap-2">
-              <Trash2 className="w-5 h-5" /> Delete Lead
+              <Trash2 className="w-5 h-5" /> Eliminar Lead
             </DialogTitle>
             <DialogDescription className="text-muted-foreground pt-2">
-              Are you sure you want to permanently delete the lead <strong>{deletingLead?.name}</strong>? This action cannot be undone.
+              ¿Estás seguro de que deseas eliminar permanentemente al lead <strong>{deletingLead?.name}</strong>? Esta acción no se puede deshacer.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="pt-4">
-            <Button type="button" variant="outline" onClick={() => setDeletingLead(null)} className="border-white/10 hover:bg-white/5">
-              Cancel
+            <Button type="button" variant="outline" onClick={() => setDeletingLead(null)} className="border-white/10 hover:bg-white/5 text-white">
+              Cancelar
             </Button>
             <Button type="button" variant="destructive" onClick={confirmDelete} disabled={isDeleting}>
-              {isDeleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Yes, Delete"}
+              {isDeleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Sí, Eliminar"}
             </Button>
           </DialogFooter>
         </DialogContent>

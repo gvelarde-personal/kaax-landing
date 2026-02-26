@@ -11,7 +11,7 @@ export function Navbar() {
             <Bot className="w-6 h-6 text-white" />
           </div>
           <span className="font-display font-bold text-xl tracking-tight text-white">
-            Agent<span className="text-primary">Flow</span>
+            Kaax <span className="text-primary">AI</span>
           </span>
         </Link>
         

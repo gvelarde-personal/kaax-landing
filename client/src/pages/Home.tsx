@@ -8,9 +8,9 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X } from "lucide-react";
+import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X, MessageSquare, Infinity, Link2, Wrench, XCircle, BadgeCheck, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { SiWhatsapp } from "react-icons/si";
+import { SiWhatsapp, SiWhatsapp as SiWa } from "react-icons/si";
 import { Logo } from "@/components/Logo";
 import { Helmet } from "react-helmet";
 
@@ -178,6 +178,137 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-3 font-display">Información Valiosa</h3>
               <p className="text-muted-foreground leading-relaxed">Panel de control completo para rastrear tasas de conversión, velocidad del embudo y métricas de rendimiento del equipo.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="servicios" className="py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-6">
+              <MessageSquare className="w-4 h-4" />
+              <span>Lo que incluye</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Un agente que trabaja <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">por ti.</span></h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Implementamos un agente de IA en WhatsApp que atiende a tus clientes, califica prospectos y automatiza tu embudo de ventas.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* What's included */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-display font-bold text-white mb-8">¿Qué incluye el servicio?</h3>
+              
+              {[
+                { icon: <SiWa className="w-5 h-5 text-[#25D366]" />, bg: "bg-[#25D366]/10", title: "Agente de IA en WhatsApp", desc: "Tu propio agente inteligente entrenado con el conocimiento de tu negocio, disponible 24/7 directamente en WhatsApp." },
+                { icon: <Infinity className="w-5 h-5 text-primary" />, bg: "bg-primary/10", title: "Tokens ilimitados", desc: "Sin límite de conversaciones ni costo por mensajes adicionales. Gestionado en AWS sin preocupaciones." },
+                { icon: <Link2 className="w-5 h-5 text-purple-400" />, bg: "bg-purple-500/10", title: "Integración con tu CRM", desc: "Conectamos el agente con tu CRM actual. Licencia del CRM corre por cuenta del cliente." },
+                { icon: <Wrench className="w-5 h-5 text-amber-400" />, bg: "bg-amber-500/10", title: "Configuración y soporte", desc: "Nos encargamos de la implementación completa y ofrecemos soporte mensual incluido en el plan." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-5 items-start group">
+                  <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CRM Compatibility */}
+            <div className="glass-card p-8 rounded-2xl">
+              <h3 className="text-xl font-display font-bold text-white mb-2">CRMs compatibles</h3>
+              <p className="text-muted-foreground text-sm mb-8">Integración nativa con los principales sistemas. La licencia no está incluida en el plan — corre por cuenta del cliente.</p>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { name: "HubSpot", color: "text-orange-400", bg: "bg-orange-500/10 border-orange-500/20" },
+                  { name: "Salesforce", color: "text-blue-400", bg: "bg-blue-500/10 border-blue-500/20" },
+                  { name: "Odoo", color: "text-purple-400", bg: "bg-purple-500/10 border-purple-500/20" },
+                  { name: "SuiteCRM", color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/20" },
+                  { name: "Zoho CRM", color: "text-red-400", bg: "bg-red-500/10 border-red-500/20" },
+                  { name: "Tu CRM actual", color: "text-primary", bg: "bg-primary/10 border-primary/20" },
+                ].map((crm, i) => (
+                  <div key={i} className={`flex items-center gap-3 p-4 rounded-xl border ${crm.bg}`}>
+                    <BadgeCheck className={`w-5 h-5 ${crm.color} shrink-0`} />
+                    <span className="text-sm font-medium text-white">{crm.name}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <p className="mt-6 text-xs text-muted-foreground text-center">¿Usas otro CRM? Contáctanos y lo evaluamos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="precios" className="py-24 bg-zinc-950 border-y border-white/5 relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-6">
+              <Sparkles className="w-4 h-4" />
+              <span>Precio transparente</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Sin sorpresas.</h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">Un solo plan claro para que te enfoques en vender, no en calcular costos.</p>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-md">
+              {/* Badge */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                <div className="bg-gradient-to-r from-primary to-emerald-400 text-black text-xs font-bold px-4 py-1.5 rounded-full whitespace-nowrap shadow-lg">
+                  Oferta — Primeros 10 clientes
+                </div>
+              </div>
+              
+              <div className="glass-card p-8 md:p-10 rounded-3xl border border-primary/30 shadow-[0_0_40px_rgba(34,197,94,0.1)]">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-display font-bold text-white mb-2">Agente Pro</h3>
+                  <p className="text-muted-foreground text-sm mb-6">Agente de IA en WhatsApp para tu negocio</p>
+                  <div className="flex items-end justify-center gap-1">
+                    <span className="text-zinc-400 text-lg font-medium mb-1">$</span>
+                    <span className="text-6xl font-display font-bold text-white">18,000</span>
+                    <div className="mb-1 text-left">
+                      <div className="text-zinc-400 text-sm font-medium">MXN</div>
+                      <div className="text-zinc-400 text-sm">+ IVA / mes</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    { included: true, text: "Agente de IA personalizado en WhatsApp" },
+                    { included: true, text: "Tokens ilimitados (sin costo adicional)" },
+                    { included: true, text: "Integración con tu CRM actual" },
+                    { included: true, text: "Configuración e implementación completa" },
+                    { included: true, text: "Soporte mensual incluido" },
+                    { included: true, text: "Disponibilidad 24/7 sin interrupciones" },
+                    { included: false, text: "Licencia de CRM (corre por el cliente)" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      {item.included
+                        ? <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                        : <XCircle className="w-5 h-5 text-zinc-600 shrink-0" />
+                      }
+                      <span className={`text-sm ${item.included ? "text-zinc-200" : "text-zinc-500"}`}>{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <a href="#capture" className="block">
+                  <Button className="w-full h-14 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                    Solicitar Información
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </a>
+                <p className="text-center text-xs text-zinc-500 mt-4">Sin contratos anuales forzosos · Contrato mensual</p>
+              </div>
             </div>
           </div>
         </div>

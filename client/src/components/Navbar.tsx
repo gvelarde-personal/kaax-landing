@@ -16,14 +16,17 @@ export function Navbar() {
         
         <nav className="flex items-center gap-6">
           <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors hidden md:block">
-            Features
+            Funciones
           </a>
-          <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors hidden md:block">
-            How it Works
+          <a href="#servicios" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors hidden md:block">
+            Servicios
+          </a>
+          <a href="#precios" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors hidden md:block">
+            Precios
           </a>
           <a href="#capture">
             <Button className="bg-white text-black hover:bg-zinc-200 group transition-all">
-              Get Started
+              Empezar
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </a>

@@ -5,12 +5,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { 
-  Bot, Users, LayoutDashboard, Settings, Loader2, Trash2, Edit, MoreHorizontal
+  Users, LayoutDashboard, Settings, Loader2, Trash2, Edit, MoreHorizontal
 } from "lucide-react";
 
 import { useLeads, useUpdateLead, useDeleteLead } from "@/hooks/use-leads";
 import { type Lead } from "@shared/schema";
 import { type LeadUpdateInput } from "@shared/routes";
+import { Logo } from "@/components/Logo";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -84,9 +85,7 @@ export default function Admin() {
         <aside className="w-64 border-r border-white/5 bg-zinc-950/50 hidden md:flex flex-col">
           <div className="h-20 flex items-center px-6 border-b border-white/5">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
-              </div>
+              <Logo className="w-8 h-8" />
               <span className="font-display font-bold text-lg tracking-tight">Kaax AI</span>
             </Link>
           </div>

@@ -8,9 +8,10 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Bot, Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X } from "lucide-react";
+import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import { SiWhatsapp } from "react-icons/si";
+import { Logo } from "@/components/Logo";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -269,7 +270,7 @@ export default function Home() {
       
       <footer className="border-t border-white/5 py-12 text-center text-zinc-500">
         <div className="flex items-center justify-center gap-2 mb-4">
-          <Bot className="w-5 h-5" />
+          <Logo className="w-6 h-6" />
           <span className="font-display font-semibold text-white">Kaax AI</span>
         </div>
         <p>© 2024 Kaax AI. Todos los derechos reservados.</p>

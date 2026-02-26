@@ -8,11 +8,15 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X, MessageSquare, Infinity, Link2, Wrench, XCircle, BadgeCheck, ArrowRight } from "lucide-react";
+import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X, MessageSquare, Infinity, Link2, Wrench, XCircle, BadgeCheck, ArrowRight, CreditCard, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SiWhatsapp, SiWhatsapp as SiWa } from "react-icons/si";
 import { Logo } from "@/components/Logo";
 import { Helmet } from "react-helmet";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -27,6 +31,26 @@ export default function Home() {
   const { mutate: createLead, isPending } = useCreateLead();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showWhatsappTooltip, setShowWhatsappTooltip] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [checkoutEmail, setCheckoutEmail] = useState("");
+  const [checkoutName, setCheckoutName] = useState("");
+  const { toast } = useToast();
+
+  const { mutate: startCheckout, isPending: isCheckoutPending } = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/stripe/create-checkout", {
+        customerEmail: checkoutEmail,
+        customerName: checkoutName,
+      });
+      return res.json();
+    },
+    onSuccess: (data: { url: string }) => {
+      window.location.href = data.url;
+    },
+    onError: (err: any) => {
+      toast({ title: "Error al iniciar pago", description: err.message, variant: "destructive" });
+    },
+  });
 
   const form = useForm<LeadInput>({
     resolver: zodResolver(insertLeadSchema),
@@ -301,13 +325,21 @@ export default function Home() {
                   ))}
                 </div>
 
-                <a href="#capture" className="block">
-                  <Button className="w-full h-14 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-[0_0_20px_rgba(34,197,94,0.3)]">
-                    Solicitar Información
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                <Button
+                  className="w-full h-14 text-lg bg-primary hover:bg-primary/90 text-white font-bold shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+                  onClick={() => setCheckoutOpen(true)}
+                  data-testid="button-pagar-ahora"
+                >
+                  <CreditCard className="w-5 h-5 mr-2" />
+                  Pagar Ahora
+                </Button>
+                <a href="#capture" className="block mt-3">
+                  <Button variant="outline" className="w-full h-11 border-white/10 hover:bg-white/5 text-zinc-300">
+                    Solicitar Información primero
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </a>
-                <p className="text-center text-xs text-zinc-500 mt-4">Sin contratos anuales forzosos · Contrato mensual</p>
+                <p className="text-center text-xs text-zinc-500 mt-4">Sin contratos anuales · Cancela cuando quieras</p>
               </div>
             </div>
           </div>
@@ -427,6 +459,60 @@ export default function Home() {
         </div>
         <p>© 2024 Kaax AI. Todos los derechos reservados.</p>
       </footer>
+
+      {/* Checkout Modal */}
+      <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
+        <DialogContent className="bg-zinc-950 border-white/10 text-foreground sm:max-w-[440px]">
+          <DialogHeader>
+            <DialogTitle className="text-white text-xl font-display">Suscribirse — Agente Pro</DialogTitle>
+            <DialogDescription className="text-muted-foreground">
+              Ingresa tus datos para continuar al pago seguro con Stripe. Serás redirigido a la plataforma de pago.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-2">
+            <div className="bg-primary/10 border border-primary/20 rounded-xl px-4 py-3 flex items-center justify-between">
+              <span className="text-sm text-zinc-300 font-medium">Agente Pro — mensual</span>
+              <span className="text-primary font-bold font-display">$18,000 MXN + IVA</span>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-zinc-300 text-sm">Nombre completo</Label>
+              <Input
+                placeholder="Juan Pérez"
+                value={checkoutName}
+                onChange={e => setCheckoutName(e.target.value)}
+                className="bg-black/50 border-white/10 text-white placeholder:text-zinc-600"
+                data-testid="input-checkout-name"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-zinc-300 text-sm">Correo electrónico</Label>
+              <Input
+                type="email"
+                placeholder="juan@empresa.com"
+                value={checkoutEmail}
+                onChange={e => setCheckoutEmail(e.target.value)}
+                className="bg-black/50 border-white/10 text-white placeholder:text-zinc-600"
+                data-testid="input-checkout-email"
+              />
+            </div>
+            <Button
+              className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-bold"
+              disabled={!checkoutEmail || isCheckoutPending}
+              onClick={() => startCheckout()}
+              data-testid="button-checkout-submit"
+            >
+              {isCheckoutPending ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Redirigiendo a Stripe...</>
+              ) : (
+                <><CreditCard className="w-4 h-4 mr-2" /> Continuar al Pago</>
+              )}
+            </Button>
+            <p className="text-center text-xs text-zinc-600">
+              Pago 100% seguro procesado por Stripe · Cancela cuando quieras
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

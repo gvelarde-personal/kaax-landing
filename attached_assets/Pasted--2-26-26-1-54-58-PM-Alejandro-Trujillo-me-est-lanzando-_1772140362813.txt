@@ -1,0 +1,50 @@
+[2/26/26, 1:54:58 PM] Alejandro Trujillo:  me está lanzando mas info cuando le digo que me eh re el agent.yaml y cas
+[2/26/26, 1:55:07 PM] Alejandro Trujillo: Pero no entiendo bien que pedo
+[2/26/26, 1:55:10 PM] Alejandro Trujillo: Me da mucha info
+[2/26/26, 1:55:14 PM] Alejandro Trujillo: Todo lo que estás haciendo?
+[2/26/26, 1:55:48 PM] Gabo Velarde: simon es lo que estoy haciendo pero digamos que el agent.yaml es el prompt que va a usar para generar respuestas
+[2/26/26, 1:56:01 PM] Alejandro Trujillo: Ósea si se lo paso a mi hermana pa que lo vea no hay pedo?
+[2/26/26, 1:56:08 PM] Gabo Velarde: no hay pedo
+[2/26/26, 1:56:10 PM] Alejandro Trujillo: Le explico que es: es en si como las instruccciones de comportamiento del agente
+[2/26/26, 1:56:15 PM] Gabo Velarde: asi es
+[2/26/26, 2:01:30 PM] Alejandro Trujillo: Jalo. Hahahahahahaha
+[2/26/26, 2:09:55 PM] Gabo Velarde: Hahahahahaha
+[2/26/26, 2:10:00 PM] Gabo Velarde: Awebo
+[2/26/26, 2:17:06 PM] Gabo Velarde: Exactamente, para un MVP con ese volumen (100 clientes, cada uno con 1,000 usuarios), estás manejando algo así como 100,000 usuarios en total. Con las estimaciones previas, tu consumo mensual de tokens y costos seguiría siendo modesto. Tendrás un margen amplio para iterar y validar el modelo antes de que el costo o el volumen se conviertan en un reto serio. En otras palabras, sí, te da un gran margen para enfocarte en funcionalidad y experiencia antes de preocuparte por escalar costos o infraestructura.
+[2/26/26, 2:17:33 PM] Gabo Velarde: O sea, no va a ser caro
+[2/26/26, 2:17:43 PM] Alejandro Trujillo: Me perdí leve
+[2/26/26, 2:17:44 PM] Alejandro Trujillo: Entonces
+[2/26/26, 2:17:57 PM] Alejandro Trujillo: Cuál es el paquete que vamos ofrecer?
+[2/26/26, 2:18:27 PM] Gabo Velarde: Whatsapp con agente para atender clientes y automatizar potenciales leads
+[2/26/26, 2:18:45 PM] Gabo Velarde: Asi, creo que en resumen es esto
+[2/26/26, 2:18:57 PM] Alejandro Trujillo: Pero en la
+Cotización agregó tokens al mes
+[2/26/26, 2:19:00 PM] Alejandro Trujillo: Y precio?
+[2/26/26, 2:19:07 PM] Alejandro Trujillo: Y costo extra por tokens extras?
+[2/26/26, 2:19:13 PM] Gabo Velarde: No, tokens la verdad no va a suceder que exceda
+[2/26/26, 2:19:22 PM] Alejandro Trujillo: Seguro? 🧷
+[2/26/26, 2:19:25 PM] Gabo Velarde: El millon de tokens me lo cobran a 50 centavos de dolar
+[2/26/26, 2:19:43 PM] Gabo Velarde: Podemos tener 100 millones de tokens y no pasa nada
+[2/26/26, 2:19:46 PM] Alejandro Trujillo: Entonces sin estimación de tokens?
+[2/26/26, 2:19:50 PM] Gabo Velarde: Asi es
+[2/26/26, 2:20:06 PM] Gabo Velarde: Todo lo gestiono a traves de amazon web services
+[2/26/26, 2:20:06 PM] Alejandro Trujillo: Como lo vendemos como tokens ilimitados al mes
+[2/26/26, 2:20:10 PM] Alejandro Trujillo: A los primeros 10?
+[2/26/26, 2:20:13 PM] Gabo Velarde: Si
+[2/26/26, 2:20:17 PM] Gabo Velarde: Me parece bien
+[2/26/26, 2:20:29 PM] Alejandro Trujillo: Por contrato de mes ? Por cualquier cosa
+[2/26/26, 2:20:51 PM] Alejandro Trujillo: Que nos equivoquemos y vamos viendo por qué puede ser negocio vender tokens tmb
+[2/26/26, 2:20:56 PM] Alejandro Trujillo: Negocio interno
+[2/26/26, 2:21:13 PM] Alejandro Trujillo: Los clientes muchas veces no saben bien que rollo y podemos hacer dos paquetes
+[2/26/26, 2:21:25 PM] Alejandro Trujillo: Paquete élite tokens ilimitados.
+[2/26/26, 2:21:43 PM] Alejandro Trujillo: Paketaxo tontos tokens .
+[2/26/26, 2:22:03 PM] Alejandro Trujillo: Igual después vemos ahorita solo un precio  10 clientes y tokens ilimitados
+[2/26/26, 2:22:45 PM] Alejandro Trujillo: en 18 + IVA? Por implementación de agente de IA mensual
+[2/26/26, 2:23:10 PM] Alejandro Trujillo: Licencia de crm no incluye, corre por el cliente.
+[2/26/26, 2:23:21 PM] Alejandro Trujillo: Que crms se adaptan?
+[2/26/26, 2:23:43 PM] Gabo Velarde: Los que usen: hubspot, alguno open source, el que tu usas etc
+[2/26/26, 2:33:57 PM] Gabo Velarde: Va
+[2/26/26, 2:38:20 PM] Alejandro Trujillo: Agregamos eso a la cotización?
+[2/26/26, 2:42:57 PM] Gabo Velarde: Sip
+[2/26/26, 2:43:05 PM] Gabo Velarde: Para que sepan que no esta limitado
+[2/26/26, 2:43:28 PM] Alejandro Trujillo: A huevo algo así puedes  agregar a la web?

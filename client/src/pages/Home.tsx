@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertLeadSchema } from "@shared/schema";
@@ -8,8 +8,9 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Bot, Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2 } from "lucide-react";
+import { Bot, Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X } from "lucide-react";
 import { useState } from "react";
+import { SiWhatsapp } from "react-icons/si";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -23,6 +24,7 @@ const stagger = {
 export default function Home() {
   const { mutate: createLead, isPending } = useCreateLead();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showWhatsappTooltip, setShowWhatsappTooltip] = useState(false);
 
   const form = useForm<LeadInput>({
     resolver: zodResolver(insertLeadSchema),
@@ -40,9 +42,46 @@ export default function Home() {
     });
   };
 
+  const whatsappNumber = "525500000000"; // Placeholder number, user should update this
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola Kaax AI, me gustaría obtener más información sobre sus agentes inteligentes.")}`;
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
+
+      {/* Floating WhatsApp Button */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        <AnimatePresence>
+          {showWhatsappTooltip && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.8, x: 20 }}
+              className="bg-white text-black p-3 rounded-2xl shadow-2xl mb-2 mr-2 text-sm font-medium relative max-w-[200px]"
+            >
+              <button 
+                onClick={() => setShowWhatsappTooltip(false)}
+                className="absolute -top-2 -right-2 bg-zinc-200 rounded-full p-1 hover:bg-zinc-300 transition-colors"
+              >
+                <X className="w-3 h-3" />
+              </button>
+              ¿Tienes dudas? ¡Chatea con nosotros por WhatsApp!
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <motion.a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onMouseEnter={() => setShowWhatsappTooltip(true)}
+          className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 hover:shadow-[#25D366]/40"
+          initial={{ scale: 0, rotate: -45 }}
+          animate={{ scale: 1, rotate: 0 }}
+          whileHover={{ y: -4 }}
+        >
+          <SiWhatsapp className="w-8 h-8" />
+        </motion.a>
+      </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">

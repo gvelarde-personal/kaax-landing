@@ -21,11 +21,6 @@ export function Navbar() {
           <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors hidden md:block">
             How it Works
           </a>
-          <Link href="/admin">
-            <Button variant="outline" className="hidden sm:flex border-white/10 hover:bg-white/5">
-              Dashboard
-            </Button>
-          </Link>
           <a href="#capture">
             <Button className="bg-white text-black hover:bg-zinc-200 group transition-all">
               Get Started

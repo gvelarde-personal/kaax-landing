@@ -3,14 +3,21 @@ import type { Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
+import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  await setupAuth(app);
+  registerAuthRoutes(app);
   
   app.get(api.leads.list.path, async (req, res) => {
     try {
+      const replitUser = req.headers["x-replit-user-id"];
+      if (!replitUser) {
+        return res.status(401).json({ message: "No autorizado" });
+      }
       const allLeads = await storage.getLeads();
       res.status(200).json(allLeads);
     } catch (err) {
@@ -20,6 +27,10 @@ export async function registerRoutes(
 
   app.get(api.leads.get.path, async (req, res) => {
     try {
+      const replitUser = req.headers["x-replit-user-id"];
+      if (!replitUser) {
+        return res.status(401).json({ message: "No autorizado" });
+      }
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
         return res.status(400).json({ message: "Invalid ID" });
@@ -52,6 +63,10 @@ export async function registerRoutes(
 
   app.put(api.leads.update.path, async (req, res) => {
     try {
+      const replitUser = req.headers["x-replit-user-id"];
+      if (!replitUser) {
+        return res.status(401).json({ message: "No autorizado" });
+      }
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
         return res.status(400).json({ message: "Invalid ID" });
@@ -78,6 +93,10 @@ export async function registerRoutes(
 
   app.delete(api.leads.delete.path, async (req, res) => {
     try {
+      const replitUser = req.headers["x-replit-user-id"];
+      if (!replitUser) {
+        return res.status(401).json({ message: "No autorizado" });
+      }
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
         return res.status(400).json({ message: "Invalid ID" });

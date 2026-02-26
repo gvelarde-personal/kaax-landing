@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { 
-  Users, LayoutDashboard, Settings, Loader2, Trash2, Edit, MoreHorizontal
+  Users, LayoutDashboard, Settings, Loader2, Trash2, Edit, MoreHorizontal, LogIn
 } from "lucide-react";
 
 import { useLeads, useUpdateLead, useDeleteLead } from "@/hooks/use-leads";
@@ -23,6 +23,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+// Simple hook to check Replit Auth status
+function useReplitAuth() {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/_replauth")
+      .then(res => {
+        if (res.status === 401) return null;
+        return res.json();
+      })
+      .then(data => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  return { user, loading };
+}
+
   const STATUS_LABELS: Record<string, string> = {
     new: "Nuevo",
     contacted: "Contactado",
@@ -38,6 +59,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
   };
 
 export default function Admin() {
+  const { user, loading: authLoading } = useReplitAuth();
   const { data: leads = [], isLoading } = useLeads();
   const { mutate: updateLead, isPending: isUpdating } = useUpdateLead();
   const { mutate: deleteLead, isPending: isDeleting } = useDeleteLead();
@@ -71,6 +93,32 @@ export default function Admin() {
       onSuccess: () => setDeletingLead(null)
     });
   };
+
+  if (authLoading) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center bg-zinc-950">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="h-screen w-full flex flex-col items-center justify-center bg-zinc-950 text-white p-4">
+        <Logo className="w-20 h-20 mb-8" />
+        <h1 className="text-3xl font-display font-bold mb-4">Acceso Restringido</h1>
+        <p className="text-muted-foreground mb-8 text-center max-w-md">
+          El panel de administración es privado. Por favor, inicia sesión con tu cuenta de Replit para continuar.
+        </p>
+        <Button 
+          onClick={() => window.location.href = `/_replauth?redirect_url=${window.location.href}`}
+          className="bg-primary hover:bg-primary/90 h-12 px-8 text-white font-bold"
+        >
+          <LogIn className="w-4 h-4 mr-2" /> Iniciar Sesión con Replit
+        </Button>
+      </div>
+    );
+  }
 
   // Derived stats
   const totalLeads = leads.length;

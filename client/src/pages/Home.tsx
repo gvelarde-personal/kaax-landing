@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SiWhatsapp } from "react-icons/si";
 import { Logo } from "@/components/Logo";
+import { Helmet } from "react-helmet";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -48,6 +49,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Helmet>
+        <title>Kaax AI - Vende más con Agentes Inteligentes</title>
+        <meta name="description" content="Aumenta tus ventas con agentes inteligentes. Identifica leads calificados y atiende 24/7 con Kaax AI." />
+        
+        {/* Open Graph / Facebook / WhatsApp */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content="Kaax AI - Vende más con Agentes Inteligentes" />
+        <meta property="og:description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA." />
+        <meta property="og:image" content="https://kaax-ai.replit.app/og-image.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={window.location.href} />
+        <meta property="twitter:title" content="Kaax AI - Vende más con Agentes Inteligentes" />
+        <meta property="twitter:description" content="Identifica leads calificados, interactúa al instante y cierra más acuerdos con un sistema CRM impulsado por IA." />
+        <meta property="twitter:image" content="https://kaax-ai.replit.app/og-image.png" />
+      </Helmet>
+
       <Navbar />
 
       {/* Floating WhatsApp Button */}

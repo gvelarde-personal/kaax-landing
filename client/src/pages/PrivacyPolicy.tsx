@@ -92,7 +92,7 @@ export default function PrivacyPolicy() {
             <p className="mt-3">
               Para ejercer cualquiera de estos derechos, escríbenos a través de WhatsApp al{" "}
               <a
-                href="https://wa.me/523325364780"
+                href="https://wa.me/525658989637"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"

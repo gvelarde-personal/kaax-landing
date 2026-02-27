@@ -48,7 +48,7 @@ export default function Success() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href={`https://wa.me/523325364780?text=${encodeURIComponent("Hola! Acabo de suscribirme a Kaax AI. Mi referencia es: " + sessionId)}`}
+            href={`https://wa.me/525658989637?text=${encodeURIComponent("Hola! Acabo de suscribirme a Kaax AI. Mi referencia es: " + sessionId)}`}
             target="_blank"
             rel="noopener noreferrer"
           >

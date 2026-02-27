@@ -458,6 +458,9 @@ export default function Home() {
           <span className="font-display font-semibold text-white">Kaax AI</span>
         </div>
         <p>© 2026 Kaax AI. Todos los derechos reservados.</p>
+        <a href="/privacidad" className="inline-block mt-2 text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+          Política de Privacidad
+        </a>
       </footer>
 
       {/* Checkout Modal */}

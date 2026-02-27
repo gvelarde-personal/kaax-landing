@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import Admin from "@/pages/Admin";
 import Success from "@/pages/Success";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import TermsOfService from "@/pages/TermsOfService";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/success" component={Success} />
       <Route path="/privacidad" component={PrivacyPolicy} />
+      <Route path="/terminos" component={TermsOfService} />
       <Route component={NotFound} />
     </Switch>
   );

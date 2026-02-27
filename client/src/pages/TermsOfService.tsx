@@ -149,7 +149,7 @@ export default function TermsOfService() {
             <p>
               Para cualquier consulta relacionada con estos Términos y Condiciones, puedes comunicarte con nosotros a través de WhatsApp al{" "}
               <a
-                href="https://wa.me/525658618626"
+                href="https://wa.me/523325364780"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"

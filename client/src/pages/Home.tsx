@@ -68,7 +68,7 @@ export default function Home() {
     });
   };
 
-  const whatsappNumber = "525658618626"; // Actualizado con el número del usuario
+  const whatsappNumber = "523325364780";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola Kaax AI, me gustaría obtener más información sobre sus agentes inteligentes.")}`;
 
   return (

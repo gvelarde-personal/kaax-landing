@@ -5,12 +5,25 @@ import { api } from "@shared/routes";
 import { z } from "zod";
 import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth";
 import { stripe, STRIPE_PRICE_ID, STRIPE_PUBLIC_KEY, isTestMode, isProd } from "./stripe";
+import { PRERENDERED, isBot } from "./prerender";
 import express from "express";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  // ── Dynamic rendering for SEO bots ───────────────────────────────────────
+  app.get(/^\/(privacidad|terminos)?$/, (req, res, next) => {
+    const ua = req.headers["user-agent"];
+    if (!isBot(ua)) return next();
+    const route = req.path === "/" ? "/" : `/${req.path.replace(/^\//, "").split("/")[0]}`;
+    const html = PRERENDERED[route];
+    if (!html) return next();
+    res.set("Content-Type", "text/html; charset=utf-8")
+       .set("X-Prerendered", "true")
+       .send(html);
+  });
+
   await setupAuth(app);
   registerAuthRoutes(app);
 

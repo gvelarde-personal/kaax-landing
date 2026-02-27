@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import {
   Users, CreditCard, Loader2, Trash2, Edit, MoreHorizontal, LogIn,
-  TrendingUp, CheckCircle2, XCircle, Clock, BadgeDollarSign,
+  TrendingUp, CheckCircle2, XCircle, Clock, BadgeDollarSign, MessageCircle,
 } from "lucide-react";
 
 import { useLeads, useUpdateLead, useDeleteLead } from "@/hooks/use-leads";
@@ -21,7 +21,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 function useReplitAuth() {
   const [user, setUser] = useState<any>(null);
@@ -44,6 +44,15 @@ const STATUS_COLORS: Record<string, string> = {
   qualified: "bg-green-500/10 text-green-400 border-green-500/20",
   lost: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
 };
+function whatsappGreetingUrl(lead: Lead): string | null {
+  if (!lead.phone) return null;
+  const digits = lead.phone.replace(/\D/g, "");
+  const nombre = lead.name.split(" ")[0];
+  const empresa = lead.company ? ` de ${lead.company}` : "";
+  const msg = `Hola ${nombre}${empresa}, soy de Kaax AI. Me comunico porque mostraste interés en nuestro agente de WhatsApp para automatizar ventas. ¿Tienes un momento para platicar?`;
+  return `https://wa.me/${digits}?text=${encodeURIComponent(msg)}`;
+}
+
 const SUB_STATUS_COLORS: Record<string, string> = {
   active: "bg-green-500/10 text-green-400 border-green-500/20",
   cancelled: "bg-red-500/10 text-red-400 border-red-500/20",
@@ -248,9 +257,27 @@ export default function Admin() {
                                   </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end" className="bg-zinc-900 border-white/10 text-white">
+                                  {whatsappGreetingUrl(lead) ? (
+                                    <DropdownMenuItem asChild>
+                                      <a
+                                        href={whatsappGreetingUrl(lead)!}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="cursor-pointer hover:bg-[#25D366]/10 text-[#25D366] focus:bg-[#25D366]/10 focus:text-[#25D366] flex items-center"
+                                        data-testid={`whatsapp-lead-${lead.id}`}
+                                      >
+                                        <MessageCircle className="w-4 h-4 mr-2" /> Saludar por WhatsApp
+                                      </a>
+                                    </DropdownMenuItem>
+                                  ) : (
+                                    <DropdownMenuItem disabled className="text-zinc-600 cursor-not-allowed">
+                                      <MessageCircle className="w-4 h-4 mr-2" /> Sin teléfono registrado
+                                    </DropdownMenuItem>
+                                  )}
                                   <DropdownMenuItem onClick={() => openEdit(lead)} className="cursor-pointer hover:bg-white/10">
                                     <Edit className="w-4 h-4 mr-2" /> Actualizar Estado
                                   </DropdownMenuItem>
+                                  <DropdownMenuSeparator className="bg-white/10" />
                                   <DropdownMenuItem onClick={() => setDeletingLead(lead)} className="cursor-pointer text-destructive focus:bg-destructive/10 focus:text-destructive">
                                     <Trash2 className="w-4 h-4 mr-2" /> Eliminar Lead
                                   </DropdownMenuItem>

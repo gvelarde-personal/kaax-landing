@@ -457,7 +457,7 @@ export default function Home() {
           <Logo className="w-6 h-6" />
           <span className="font-display font-semibold text-white">Kaax AI</span>
         </div>
-        <p>© 2024 Kaax AI. Todos los derechos reservados.</p>
+        <p>© 2026 Kaax AI. Todos los derechos reservados.</p>
       </footer>
 
       {/* Checkout Modal */}

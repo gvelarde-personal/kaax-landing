@@ -5,12 +5,18 @@ const BASE_HTML = (title: string, description: string, path: string, body: strin
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${title}</title>
   <meta name="description" content="${description}" />
+  <link rel="canonical" href="https://kaax.ai${path}" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kaax.ai${path}" />
   <meta property="og:title" content="${title}" />
   <meta property="og:description" content="${description}" />
   <meta property="og:image" content="https://kaax.ai/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="es_MX" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://kaax.ai${path}" />
   <meta name="twitter:title" content="${title}" />
   <meta name="twitter:description" content="${description}" />
   <meta name="twitter:image" content="https://kaax.ai/og-image.png" />
@@ -202,7 +208,7 @@ export function isBot(userAgent: string | undefined): boolean {
   if (!userAgent) return true;                        // no UA → prerender
   const ua = userAgent;
   // Explicit known bots always get prerender
-  if (/bot|crawl|spider|slurp|fetch|scrape|http|python|java|ruby|perl|curl|wget|axios|node-fetch|got\/|undici|openai|gptbot|chatgpt|anthropic|claude|gemini|copilot|bingpreview|facebookexternalhit|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|applebot|ahrefsbot|semrushbot|mj12bot|ia_archiver/i.test(ua)) {
+  if (/bot|crawl|spider|slurp|fetch|scrape|http|python|java|ruby|perl|curl|wget|axios|node-fetch|got\/|undici|openai|gptbot|chatgpt|anthropic|claude|gemini|copilot|bingpreview|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|applebot|ahrefsbot|semrushbot|mj12bot|ia_archiver|google-inspectiontool|whatsapp|iframely|embedly|quora|pinterest|vkshare|w3c_validator|preview/i.test(ua)) {
     return true;
   }
   // If it doesn't look like a real browser with a real OS, prerender it

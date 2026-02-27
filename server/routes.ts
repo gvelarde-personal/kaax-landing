@@ -21,6 +21,7 @@ export async function registerRoutes(
     if (!html) return next();
     res.set("Content-Type", "text/html; charset=utf-8")
        .set("X-Prerendered", "true")
+       .set("Vary", "User-Agent")
        .send(html);
   });
 

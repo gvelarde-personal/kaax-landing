@@ -193,9 +193,21 @@ export const PRERENDERED: Record<string, string> = {
   ),
 };
 
-const BOT_UA = /googlebot|bingbot|yandexbot|duckduckbot|slurp|facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|applebot|discordbot|ia_archiver|ahrefsbot|semrushbot|mj12bot/i;
+// Real browsers always have an OS/device marker alongside the engine string.
+// Tools, scrapers, and LLM crawlers typically lack these or carry extra markers.
+const REAL_BROWSER_OS = /\b(Windows NT|Macintosh|Linux x86_64|Android \d|iPhone|iPad|CrOS)\b/;
+const REAL_BROWSER_ENGINE = /\b(Chrome|Firefox|Safari|Edg|OPR)\//;
 
 export function isBot(userAgent: string | undefined): boolean {
-  if (!userAgent) return false;
-  return BOT_UA.test(userAgent);
+  if (!userAgent) return true;                        // no UA → prerender
+  const ua = userAgent;
+  // Explicit known bots always get prerender
+  if (/bot|crawl|spider|slurp|fetch|scrape|http|python|java|ruby|perl|curl|wget|axios|node-fetch|got\/|undici|openai|gptbot|chatgpt|anthropic|claude|gemini|copilot|bingpreview|facebookexternalhit|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|applebot|ahrefsbot|semrushbot|mj12bot|ia_archiver/i.test(ua)) {
+    return true;
+  }
+  // If it doesn't look like a real browser with a real OS, prerender it
+  if (!REAL_BROWSER_OS.test(ua) || !REAL_BROWSER_ENGINE.test(ua)) {
+    return true;
+  }
+  return false;
 }

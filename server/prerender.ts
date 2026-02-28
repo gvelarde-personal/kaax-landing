@@ -199,21 +199,9 @@ export const PRERENDERED: Record<string, string> = {
   ),
 };
 
-// Real browsers always have an OS/device marker alongside the engine string.
-// Tools, scrapers, and LLM crawlers typically lack these or carry extra markers.
-const REAL_BROWSER_OS = /\b(Windows NT|Macintosh|Linux x86_64|Android \d|iPhone|iPad|CrOS)\b/;
-const REAL_BROWSER_ENGINE = /\b(Chrome|Firefox|Safari|Edg|OPR)\//;
-
 export function isBot(userAgent: string | undefined): boolean {
-  if (!userAgent) return true;                        // no UA → prerender
-  const ua = userAgent;
-  // Explicit known bots always get prerender
-  if (/bot|crawl|spider|slurp|fetch|scrape|http|python|java|ruby|perl|curl|wget|axios|node-fetch|got\/|undici|openai|gptbot|chatgpt|anthropic|claude|gemini|copilot|bingpreview|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|applebot|ahrefsbot|semrushbot|mj12bot|ia_archiver|google-inspectiontool|whatsapp|iframely|embedly|quora|pinterest|vkshare|w3c_validator|preview/i.test(ua)) {
-    return true;
-  }
-  // If it doesn't look like a real browser with a real OS, prerender it
-  if (!REAL_BROWSER_OS.test(ua) || !REAL_BROWSER_ENGINE.test(ua)) {
-    return true;
-  }
-  return false;
+  if (!userAgent) return true; // no UA → prerender
+  // Only serve prerender to clearly-identified non-browser agents.
+  // When in doubt, return false so real users always get the SPA.
+  return /googlebot|google-inspectiontool|bingbot|yandexbot|duckduckbot|slurp|bingpreview|facebookexternalhit|facebot|twitterbot|linkedinbot|slackbot-linkexpanding|telegrambot|discordbot|applebot|whatsapp\/|iframely|embedly|vkshare|ahrefsbot|semrushbot|mj12bot|ia_archiver|gptbot|chatgpt-user|oai-searchbot|anthropic-ai|claudebot|googleother|python-requests|python-urllib|curl\/|wget\/|go-http-client|java\/|ruby\/|axios\/|node-fetch|undici|node\.js/i.test(userAgent);
 }

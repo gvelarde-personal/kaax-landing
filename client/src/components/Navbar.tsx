@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 
 export function Navbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-white/5">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
           <Logo className="w-10 h-10 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-all" />

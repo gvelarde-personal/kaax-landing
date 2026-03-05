@@ -298,15 +298,20 @@ export default function Demo() {
                 );
               })}
 
-              <Link href="/#capture">
+              <a
+                href={import.meta.env.VITE_CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="button-cta-demo"
+                className="block mt-4"
+              >
                 <Button
-                  data-testid="button-cta-demo"
-                  className="w-full mt-4 bg-primary text-black hover:bg-primary/90 font-semibold group"
+                  className="w-full bg-primary text-black hover:bg-primary/90 font-semibold group"
                 >
                   Quiero esto para mi negocio
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </Link>
+              </a>
             </div>
 
             <div className="flex-1 w-full max-w-md mx-auto lg:mx-0">
@@ -384,16 +389,20 @@ export default function Demo() {
 
           <div className="mt-16 text-center">
             <p className="text-zinc-500 text-sm mb-6">¿Listo para tener tu propio agente de IA?</p>
-            <Link href="/#capture">
+            <a
+              href={import.meta.env.VITE_CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="button-cta-bottom"
+            >
               <Button
-                data-testid="button-cta-bottom"
                 size="lg"
                 className="bg-primary text-black hover:bg-primary/90 font-semibold px-8 group"
               >
                 Agendar demostración real
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </main>

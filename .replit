@@ -48,3 +48,4 @@ integrations = ["javascript_log_in_with_replit:2.0.0"]
 
 [userenv.shared]
 IS_PROD = "true"
+VITE_CALENDLY_URL = "https://calendly.com/admin-novadream/30min"

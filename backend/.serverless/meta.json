@@ -1,0 +1,137 @@
+{
+  "/Users/gvelarde/Downloads/kaax-landing/backend/serverless.yml": {
+    "versionFramework": "4.33.0",
+    "servicePath": "/Users/gvelarde/Downloads/kaax-landing/backend/serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "kaax-api",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs20.x",
+        "region": "us-east-1",
+        "architecture": "arm64",
+        "memorySize": 256,
+        "timeout": 10,
+        "environment": {
+          "NODE_ENV": "production",
+          "DATABASE_URL": "${env:DATABASE_URL}",
+          "STRIPE_SECRET_KEY": "<REDACTED>",
+          "STRIPE_SECRET_KEY_PROD": "<REDACTED>",
+          "STRIPE_PRICE_ID": "${env:STRIPE_PRICE_ID}",
+          "STRIPE_PRICE_ID_PROD": "${env:STRIPE_PRICE_ID_PROD, ''}",
+          "STRIPE_WEBHOOK_SECRET": "<REDACTED>",
+          "STRIPE_WEBHOOK_SECRET_PROD": "<REDACTED>",
+          "FRONTEND_URL": "${env:FRONTEND_URL, 'https://kaax.ai'}"
+        },
+        "iam": {
+          "role": {
+            "statements": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "logs:CreateLogGroup",
+                  "logs:CreateLogStream",
+                  "logs:PutLogEvents"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      },
+      "functions": {
+        "api": {
+          "handler": "dist/index.handler",
+          "url": {
+            "cors": {
+              "allowedOrigins": [
+                "${env:FRONTEND_URL, 'https://kaax.ai'}",
+                "http://localhost:3000"
+              ],
+              "allowedHeaders": [
+                "Content-Type",
+                "Authorization",
+                "stripe-signature"
+              ],
+              "allowedMethods": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS"
+              ],
+              "allowCredentials": "<REDACTED>"
+            }
+          },
+          "events": [
+            {
+              "httpApi": "*"
+            }
+          ]
+        }
+      },
+      "package": {
+        "patterns": [
+          "!**",
+          "dist/**"
+        ]
+      },
+      "plugins": [
+        "serverless-offline"
+      ],
+      "custom": {
+        "serverless-offline": {
+          "httpPort": 8787
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "region": "us-east-1",
+      "architecture": "arm64",
+      "memorySize": 256,
+      "timeout": 10,
+      "environment": {
+        "NODE_ENV": "production",
+        "DATABASE_URL": "${env:DATABASE_URL}",
+        "STRIPE_SECRET_KEY": "<REDACTED>",
+        "STRIPE_SECRET_KEY_PROD": "<REDACTED>",
+        "STRIPE_PRICE_ID": "${env:STRIPE_PRICE_ID}",
+        "STRIPE_PRICE_ID_PROD": "${env:STRIPE_PRICE_ID_PROD, ''}",
+        "STRIPE_WEBHOOK_SECRET": "<REDACTED>",
+        "STRIPE_WEBHOOK_SECRET_PROD": "<REDACTED>",
+        "FRONTEND_URL": "${env:FRONTEND_URL, 'https://kaax.ai'}"
+      },
+      "iam": {
+        "role": {
+          "statements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    },
+    "error": {
+      "message": "You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".",
+      "stack": "Error: You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".\n    at Authentication.getAuthenticatedData (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:891:11566)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Authentication.authenticate (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:894:4133)\n    at async TraditionalRunner.resolveVariablesAndAuthenticate (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:902:2394)\n    at async TraditionalRunner.run (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:2348:27823)\n    at async route (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:2519:2848)\n    at async Object.run (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:2520:3886)\n    at async run2 (file:///Users/gvelarde/.serverless/releases/4.33.0/package/dist/sf-core.js:2520:5040)"
+    },
+    "serviceRawFile": "service: kaax-api\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: ${env:AWS_REGION, 'us-east-1'}\n  architecture: arm64  # Graviton2 - más barato y rápido\n  memorySize: 256\n  timeout: 10\n  environment:\n    NODE_ENV: production\n    DATABASE_URL: ${env:DATABASE_URL}\n    STRIPE_SECRET_KEY: ${env:STRIPE_SECRET_KEY}\n    STRIPE_SECRET_KEY_PROD: ${env:STRIPE_SECRET_KEY_PROD, ''}\n    STRIPE_PRICE_ID: ${env:STRIPE_PRICE_ID}\n    STRIPE_PRICE_ID_PROD: ${env:STRIPE_PRICE_ID_PROD, ''}\n    STRIPE_WEBHOOK_SECRET: ${env:STRIPE_WEBHOOK_SECRET}\n    STRIPE_WEBHOOK_SECRET_PROD: ${env:STRIPE_WEBHOOK_SECRET_PROD, ''}\n    FRONTEND_URL: ${env:FRONTEND_URL, 'https://kaax.ai'}\n  iam:\n    role:\n      statements:\n        - Effect: Allow\n          Action:\n            - logs:CreateLogGroup\n            - logs:CreateLogStream\n            - logs:PutLogEvents\n          Resource: '*'\n\nfunctions:\n  api:\n    handler: dist/index.handler\n    url:\n      cors:\n        allowedOrigins:\n          - ${env:FRONTEND_URL, 'https://kaax.ai'}\n          - http://localhost:3000\n        allowedHeaders:\n          - Content-Type\n          - Authorization\n          - stripe-signature\n        allowedMethods:\n          - GET\n          - POST\n          - PUT\n          - DELETE\n          - OPTIONS\n        allowCredentials: true\n    events:\n      - httpApi: '*'\n\npackage:\n  patterns:\n    - '!**'\n    - 'dist/**'\n\nplugins:\n  - serverless-offline  # Para testing local\n\ncustom:\n  serverless-offline:\n    httpPort: 8787\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {},
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}

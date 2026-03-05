@@ -5,12 +5,15 @@
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env -- tsx watch src/dev.ts",
-    "build": "esbuild src/lambda.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/index.mjs --external:pg-native --external:@aws-sdk/* --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\"",
-    "deploy": "cd cdk && cdk deploy",
-    "synth": "cd cdk && cdk synth",
+    "build": "node build.mjs",
+    "deploy": "dotenv -e .env -- serverless deploy",
+    "remove": "dotenv -e .env -- serverless remove",
+    "info": "dotenv -e .env -- serverless info",
+    "logs": "dotenv -e .env -- serverless logs -f api",
     "db:push": "dotenv -e .env -- drizzle-kit push"
   },
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.1002.0",
     "@hono/node-server": "^1.14.0",
     "drizzle-orm": "^0.39.3",
     "drizzle-zod": "^0.7.0",
@@ -29,6 +32,7 @@
     "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.8",
     "esbuild": "^0.24.2",
+    "serverless": "^3",
     "tsx": "^4.20.4",
     "typescript": "5.6.3"
   },

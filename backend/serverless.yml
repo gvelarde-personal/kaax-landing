@@ -1,0 +1,62 @@
+service: kaax-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ${env:AWS_REGION, 'us-east-1'}
+  architecture: arm64  # Graviton2 - más barato y rápido
+  memorySize: 256
+  timeout: 10
+  environment:
+    NODE_ENV: production
+    DATABASE_URL: ${env:DATABASE_URL}
+    STRIPE_SECRET_KEY: ${env:STRIPE_SECRET_KEY}
+    STRIPE_SECRET_KEY_PROD: ${env:STRIPE_SECRET_KEY_PROD, ''}
+    STRIPE_PRICE_ID: ${env:STRIPE_PRICE_ID}
+    STRIPE_PRICE_ID_PROD: ${env:STRIPE_PRICE_ID_PROD, ''}
+    STRIPE_WEBHOOK_SECRET: ${env:STRIPE_WEBHOOK_SECRET}
+    STRIPE_WEBHOOK_SECRET_PROD: ${env:STRIPE_WEBHOOK_SECRET_PROD, ''}
+    FRONTEND_URL: ${env:FRONTEND_URL, 'https://kaax.ai'}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: '*'
+
+functions:
+  api:
+    handler: dist/index.handler
+    url:
+      cors:
+        allowedOrigins:
+          - ${env:FRONTEND_URL, 'https://kaax.ai'}
+          - http://localhost:3000
+        allowedHeaders:
+          - Content-Type
+          - Authorization
+          - stripe-signature
+        allowedMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        allowCredentials: true
+    events:
+      - httpApi: '*'
+
+package:
+  patterns:
+    - '!**'
+    - 'dist/**'
+
+plugins:
+  - serverless-offline  # Para testing local
+
+custom:
+  serverless-offline:
+    httpPort: 8787

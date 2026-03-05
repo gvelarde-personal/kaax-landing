@@ -240,6 +240,11 @@ export default function Demo() {
 
   const handleScenarioChange = (scenario: Scenario) => {
     setActiveScenario(scenario);
+    if (window.innerWidth < 1024) {
+      setTimeout(() => {
+        document.getElementById("chat-window")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
   };
 
   const handleReplay = () => {
@@ -324,7 +329,7 @@ export default function Demo() {
               </a>
             </div>
 
-            <div className="flex-1 w-full max-w-md mx-auto lg:mx-0">
+            <div id="chat-window" className="flex-1 w-full max-w-md mx-auto lg:mx-0">
               <div className="rounded-3xl overflow-hidden shadow-2xl shadow-black/60 border border-white/10" style={{ fontFamily: "system-ui, sans-serif" }}>
 
                 <div className="bg-[#1F2C34] px-4 py-3 flex items-center gap-3">

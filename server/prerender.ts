@@ -28,8 +28,8 @@ ${body}
 
 export const PRERENDERED: Record<string, string> = {
   "/": BASE_HTML(
-    "Kaax AI - Vende más con Agentes Inteligentes de WhatsApp",
-    "Implementamos agentes de IA en WhatsApp que califican leads automáticamente y atienden clientes 24/7. $18,000 MXN/mes · Tokens ilimitados · Integración CRM.",
+    "Kaax AI — Agente de IA en WhatsApp para ventas B2B · México",
+    "Implementamos un agente de IA en tu WhatsApp que califica leads automáticamente y atiende clientes 24/7. Tokens ilimitados · Integración CRM · $18,000 MXN/mes.",
     "/",
     `
 <header>

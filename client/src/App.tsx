@@ -9,12 +9,14 @@ import Admin from "@/pages/Admin";
 import Success from "@/pages/Success";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
+import Demo from "@/pages/Demo";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/demo" component={Demo} />
       <Route path="/admin" component={Admin} />
       <Route path="/success" component={Success} />
       <Route path="/privacidad" component={PrivacyPolicy} />

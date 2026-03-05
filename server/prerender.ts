@@ -144,6 +144,46 @@ export const PRERENDERED: Record<string, string> = {
 `
   ),
 
+  "/demo": BASE_HTML(
+    "Demo - Kaax AI en acción | Agente de IA para WhatsApp",
+    "Mira cómo Kaax AI atiende clientes, califica leads y maneja objeciones en WhatsApp — en tiempo real, 24/7, sin intervención humana.",
+    "/demo",
+    `
+<header>
+  <nav>
+    <a href="/">Kaax AI</a>
+    <a href="/demo">Demo</a>
+  </nav>
+</header>
+<main>
+  <h1>Así trabaja Kaax AI en WhatsApp</h1>
+  <p>Demo interactiva de los escenarios más comunes que automatiza nuestro agente de IA.</p>
+  <section>
+    <h2>Calificación de Leads</h2>
+    <p>El agente identifica prospectos calificados automáticamente con preguntas estratégicas, sin intervención humana.</p>
+  </section>
+  <section>
+    <h2>Atención al Cliente</h2>
+    <p>Resuelve dudas, consulta pedidos y da seguimiento a clientes las 24 horas, los 7 días de la semana.</p>
+  </section>
+  <section>
+    <h2>Seguimiento Automático</h2>
+    <p>Reactiva leads fríos con mensajes personalizados y los convierte en oportunidades de venta.</p>
+  </section>
+  <section>
+    <h2>Manejo de Objeciones</h2>
+    <p>Responde preguntas sobre precio, competidores y dudas frecuentes con inteligencia y precisión.</p>
+  </section>
+  <a href="/#capture">Quiero esto para mi negocio</a>
+</main>
+<footer>
+  <p>© 2026 Kaax AI. Todos los derechos reservados.</p>
+  <a href="/privacidad">Política de Privacidad</a>
+  <a href="/terminos">Términos y Condiciones</a>
+</footer>
+`
+  ),
+
   "/privacidad": BASE_HTML(
     "Política de Privacidad - Kaax AI",
     "Conoce cómo Kaax AI maneja tus datos personales. Solo recopilamos los datos necesarios para comunicarnos contigo y nunca los vendemos ni compartimos con terceros.",

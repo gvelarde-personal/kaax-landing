@@ -122,6 +122,8 @@ function TypingIndicator() {
   );
 }
 
+const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL as string;
+
 function ChatBubble({ msg }: { msg: Message }) {
   const isAgent = msg.from === "agent";
   const lines = msg.text.split("\n");
@@ -145,7 +147,11 @@ function ChatBubble({ msg }: { msg: Message }) {
         {lines.map((line, i) => {
           const formatted = line
             .replace(/\*(.*?)\*/g, "<strong>$1</strong>")
-            .replace(/\[(.*?)\]/g, '<span class="text-green-400 underline">[$1]</span>');
+            .replace(
+              /\[link al calendario\]/g,
+              `<a href="${CALENDLY_URL}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-green-400 underline font-medium hover:text-green-300 transition-colors">📅 Elegir horario</a>`
+            )
+            .replace(/\[((?!link al calendario)[^\]]*)\]/g, '<span class="text-green-400/70 text-xs italic">[$1]</span>');
           return (
             <span key={i}>
               <span dangerouslySetInnerHTML={{ __html: formatted }} />

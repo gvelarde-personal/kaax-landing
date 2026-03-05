@@ -421,6 +421,12 @@ export default function Demo() {
             </a>
           </div>
         </div>
+
+        <div className="mt-12 border-t border-white/5 pt-6 text-center">
+          <p className="text-xs text-zinc-600 max-w-xl mx-auto leading-relaxed">
+            Los escenarios mostrados son ejemplos ilustrativos con fines demostrativos. Las conversaciones, nombres y datos utilizados son ficticios. Los resultados reales pueden variar según el caso de uso, industria y configuración del agente.
+          </p>
+        </div>
       </main>
     </div>
   );

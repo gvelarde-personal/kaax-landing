@@ -12,6 +12,7 @@ import {
   AlertCircle,
   RotateCcw,
   Sparkles,
+  Building2,
 } from "lucide-react";
 
 type MessageSender = "user" | "agent";
@@ -110,8 +111,8 @@ const scenarios: Scenario[] = [
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-2 mb-2">
-      <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-        K
+      <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0">
+        <Building2 className="w-4 h-4" />
       </div>
       <div className="bg-[#202C33] rounded-2xl rounded-bl-none px-4 py-3 flex items-center gap-1.5">
         <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -133,8 +134,8 @@ function ChatBubble({ msg }: { msg: Message }) {
       className={`flex items-end gap-2 mb-2 animate-msg-in ${isAgent ? "flex-row" : "flex-row-reverse"}`}
     >
       {isAgent && (
-        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mb-1">
-          K
+        <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0 mb-1">
+          <Building2 className="w-4 h-4" />
         </div>
       )}
       <div
@@ -324,11 +325,11 @@ export default function Demo() {
               <div className="rounded-3xl overflow-hidden shadow-2xl shadow-black/60 border border-white/10" style={{ fontFamily: "system-ui, sans-serif" }}>
 
                 <div className="bg-[#1F2C34] px-4 py-3 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0">
-                    K
+                  <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0">
+                    <Building2 className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-white font-semibold text-sm leading-tight">Kaax AI</p>
+                    <p className="text-white font-semibold text-sm leading-tight">Tu empresa</p>
                     <p className="text-green-400 text-xs">
                       {isPlaying ? (isTyping ? "escribiendo..." : "en línea") : "en línea"}
                     </p>

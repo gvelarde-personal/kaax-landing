@@ -39,9 +39,9 @@ export function Navbar() {
             Demo
           </Link>
           <a href={isHome ? "#capture" : "/#capture"}>
-            <Button className="bg-white text-black hover:bg-zinc-200 group transition-all">
+            <Button className="bg-transparent text-white border-0 shadow-none hover:bg-white/10 px-2 text-sm md:bg-white md:text-black md:hover:bg-zinc-200 md:px-4 group transition-all">
               Empezar
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3 h-3 ml-1 md:w-4 md:h-4 md:ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </a>
         </nav>

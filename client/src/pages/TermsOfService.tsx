@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { FileText } from "lucide-react";
 

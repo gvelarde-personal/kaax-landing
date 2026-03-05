@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
-import { Link } from "wouter";
+import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import {
@@ -123,7 +125,7 @@ function TypingIndicator() {
   );
 }
 
-const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL as string;
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL as string;
 
 function ChatBubble({ msg }: { msg: Message }) {
   const isAgent = msg.from === "agent";
@@ -314,7 +316,7 @@ export default function Demo() {
               })}
 
               <a
-                href={import.meta.env.VITE_CALENDLY_URL}
+                href={process.env.NEXT_PUBLIC_CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="button-cta-demo"
@@ -411,7 +413,7 @@ export default function Demo() {
             </p>
             <p className="text-zinc-400 text-sm mb-8">¿Listo para tener tu propio agente de IA?</p>
             <a
-              href={import.meta.env.VITE_CALENDLY_URL}
+              href={process.env.NEXT_PUBLIC_CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
               data-testid="button-cta-bottom"

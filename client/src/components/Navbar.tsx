@@ -1,11 +1,14 @@
-import { Link, useLocation } from "wouter";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Logo } from "./Logo";
 
 export function Navbar() {
-  const [location] = useLocation();
-  const isHome = location === "/";
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 border-b border-white/5">

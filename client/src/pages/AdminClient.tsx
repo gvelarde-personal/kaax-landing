@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
-import { Link } from "wouter";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
+import { useSession, signIn, signOut } from "next-auth/react";
 import {
   Users, CreditCard, Loader2, Trash2, Edit, MoreHorizontal, LogIn,
   TrendingUp, CheckCircle2, XCircle, Clock, BadgeDollarSign, MessageCircle,
@@ -22,18 +25,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-
-function useReplitAuth() {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetch("/api/auth/user")
-      .then(res => res.status === 401 ? null : res.json())
-      .then(data => { setUser(data); setLoading(false); })
-      .catch(() => setLoading(false));
-  }, []);
-  return { user, loading };
-}
 
 const STATUS_LABELS: Record<string, string> = {
   new: "Nuevo", contacted: "Contactado", qualified: "Calificado", lost: "Perdido",
@@ -66,7 +57,9 @@ function useSubscriptions() {
 }
 
 export default function Admin() {
-  const { user, loading: authLoading } = useReplitAuth();
+  const { data: session, status } = useSession();
+  const authLoading = status === "loading";
+  const user = session?.user;
   const { data: leads = [], isLoading: leadsLoading } = useLeads();
   const { data: subscriptions = [], isLoading: subsLoading } = useSubscriptions();
   const { mutate: updateLead, isPending: isUpdating } = useUpdateLead();
@@ -108,11 +101,11 @@ export default function Admin() {
           El panel de administración es privado. Por favor, inicia sesión con tu cuenta de Replit para continuar.
         </p>
         <Button
-          onClick={() => window.location.href = `/api/login?redirect_url=${window.location.href}`}
+          onClick={() => signIn("google")}
           className="bg-primary hover:bg-primary/90 h-12 px-8 text-white font-bold"
           data-testid="button-login"
         >
-          <LogIn className="w-4 h-4 mr-2" /> Iniciar Sesión con Replit
+          <LogIn className="w-4 h-4 mr-2" /> Iniciar Sesión con Google
         </Button>
       </div>
     );
@@ -161,7 +154,12 @@ export default function Admin() {
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-medium truncate">{user?.name || "Admin"}</p>
-                <a href="/api/logout" className="text-xs text-muted-foreground hover:text-white">Cerrar sesión</a>
+                <button
+                  onClick={() => signOut()}
+                  className="text-xs text-muted-foreground hover:text-white text-left"
+                >
+                  Cerrar sesión
+                </button>
               </div>
             </div>
           </div>

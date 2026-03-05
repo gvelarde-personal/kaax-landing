@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +14,6 @@ import { Zap, BarChart3, Clock, Sparkles, Target, CheckCircle2, MessageCircle, X
 import { useState, useEffect } from "react";
 import { SiWhatsapp, SiWhatsapp as SiWa } from "react-icons/si";
 import { Logo } from "@/components/Logo";
-import { Helmet } from "react-helmet";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -73,26 +74,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Helmet prioritizeSeoTags>
-        <title>Kaax AI — Agente de IA en WhatsApp para ventas B2B · México</title>
-        <meta name="title" content="Kaax AI — Agente de IA en WhatsApp para ventas B2B · México" />
-        <meta name="description" content="Implementamos un agente de IA en tu WhatsApp que califica leads automáticamente y atiende clientes 24/7. Tokens ilimitados · Integración CRM · $18,000 MXN/mes." />
-        
-        {/* Open Graph / Facebook / WhatsApp */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://kaax.ai/" />
-        <meta property="og:title" content="Kaax AI — Agente de IA en WhatsApp para ventas B2B · México" />
-        <meta property="og:description" content="Implementamos un agente de IA en tu WhatsApp que califica leads automáticamente y atiende clientes 24/7. Tokens ilimitados · Integración CRM · $18,000 MXN/mes." />
-        <meta property="og:image" content="https://kaax.ai/og-image.png" />
-
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://kaax.ai/" />
-        <meta property="twitter:title" content="Kaax AI — Agente de IA en WhatsApp para ventas B2B · México" />
-        <meta property="twitter:description" content="Implementamos un agente de IA en tu WhatsApp que califica leads automáticamente y atiende clientes 24/7. Tokens ilimitados · Integración CRM · $18,000 MXN/mes." />
-        <meta property="twitter:image" content="https://kaax.ai/og-image.png" />
-      </Helmet>
-
       <Navbar />
 
       {/* Floating WhatsApp Button */}

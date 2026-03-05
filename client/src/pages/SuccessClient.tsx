@@ -1,15 +1,16 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useSearch } from "wouter";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
-import { Link } from "wouter";
 
 export default function Success() {
-  const search = useSearch();
-  const params = new URLSearchParams(search);
-  const sessionId = params.get("session_id");
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
   const [verified, setVerified] = useState<"loading" | "ok" | "error">("loading");
 
   useEffect(() => {

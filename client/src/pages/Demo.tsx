@@ -253,13 +253,16 @@ export default function Demo() {
       <main className="pt-24 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center mb-10">
+          <div className="mb-6">
             <Link href="/">
-              <button data-testid="link-back-home" className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-300 transition-colors mb-6">
+              <button data-testid="link-back-home" className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
                 <ArrowLeft className="w-4 h-4" />
                 Volver al inicio
               </button>
             </Link>
+          </div>
+
+          <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium mb-4">
               <Sparkles className="w-4 h-4" />
               Demo interactiva

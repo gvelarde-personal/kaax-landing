@@ -122,15 +122,13 @@ function TypingIndicator() {
   );
 }
 
-function ChatBubble({ msg, visible }: { msg: Message; visible: boolean }) {
+function ChatBubble({ msg }: { msg: Message }) {
   const isAgent = msg.from === "agent";
   const lines = msg.text.split("\n");
 
   return (
     <div
-      className={`flex items-end gap-2 mb-2 transition-all duration-300 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-      } ${isAgent ? "flex-row" : "flex-row-reverse"}`}
+      className={`flex items-end gap-2 mb-2 animate-msg-in ${isAgent ? "flex-row" : "flex-row-reverse"}`}
     >
       {isAgent && (
         <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mb-1">
@@ -345,13 +343,14 @@ export default function Demo() {
                     </span>
                   </div>
 
-                  {activeScenario.messages.map((msg) => (
-                    <ChatBubble
-                      key={`${activeScenario.id}-${msg.id}`}
-                      msg={msg}
-                      visible={visibleMessages.includes(msg.id)}
-                    />
-                  ))}
+                  {activeScenario.messages
+                    .filter((msg) => visibleMessages.includes(msg.id))
+                    .map((msg) => (
+                      <ChatBubble
+                        key={`${activeScenario.id}-${msg.id}`}
+                        msg={msg}
+                      />
+                    ))}
 
                   {isTyping && <TypingIndicator />}
                 </div>

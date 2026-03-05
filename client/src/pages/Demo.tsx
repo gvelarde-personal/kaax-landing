@@ -393,22 +393,32 @@ export default function Demo() {
             </div>
           </div>
 
-          <div className="mt-16 text-center">
-            <p className="text-zinc-500 text-sm mb-6">¿Listo para tener tu propio agente de IA?</p>
-            <a
-              href={import.meta.env.VITE_CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="button-cta-bottom"
-            >
-              <Button
-                size="lg"
-                className="bg-primary text-black hover:bg-primary/90 font-semibold px-8 group"
+          <div
+            className={`mt-16 text-center transition-all duration-700 ease-out ${
+              done ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6 pointer-events-none"
+            }`}
+          >
+            <p className="text-primary font-display font-bold text-2xl sm:text-3xl mb-2">
+              Así de fácil
+            </p>
+            <p className="text-zinc-400 text-sm mb-8">¿Listo para tener tu propio agente de IA?</p>
+            <div className="relative inline-flex">
+              <span className="absolute inset-0 rounded-full bg-primary opacity-30 animate-ping" />
+              <a
+                href={import.meta.env.VITE_CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="button-cta-bottom"
               >
-                Agendar demostración real
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </a>
+                <Button
+                  size="lg"
+                  className="relative bg-primary text-black hover:bg-primary/90 font-semibold px-8 group"
+                >
+                  Agendar demostración real
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </main>

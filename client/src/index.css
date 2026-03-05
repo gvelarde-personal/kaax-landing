@@ -84,7 +84,7 @@
     animation: msgIn 0.22s ease-out both;
   }
   .animate-soft-pulse {
-    animation: softPulse 2.2s ease-in-out infinite;
+    animation: softPulse 3.5s ease-in-out infinite;
   }
   .text-glow {
     text-shadow: 0 0 20px hsl(var(--primary) / 0.5);

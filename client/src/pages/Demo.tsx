@@ -172,7 +172,7 @@ export default function Demo() {
   const [isTyping, setIsTyping] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [done, setDone] = useState(false);
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const clearTimeouts = () => {
@@ -228,7 +228,9 @@ export default function Demo() {
   }, [activeScenario]);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [visibleMessages, isTyping]);
 
   const handleScenarioChange = (scenario: Scenario) => {
@@ -329,6 +331,7 @@ export default function Demo() {
                 </div>
 
                 <div
+                  ref={chatContainerRef}
                   className="bg-[#0B141A] px-4 py-4 overflow-y-auto"
                   style={{
                     minHeight: "420px",
@@ -351,8 +354,6 @@ export default function Demo() {
                   ))}
 
                   {isTyping && <TypingIndicator />}
-
-                  <div ref={chatEndRef} />
                 </div>
 
                 <div className="bg-[#1F2C34] px-4 py-3 flex items-center gap-3">

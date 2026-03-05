@@ -34,7 +34,7 @@ export function Navbar() {
           <Link
             href="/demo"
             data-testid="link-demo-nav"
-            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors hidden md:block"
+            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
           >
             Demo
           </Link>

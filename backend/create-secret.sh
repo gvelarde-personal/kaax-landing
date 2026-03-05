@@ -17,8 +17,8 @@ EOF
 
 # Create or update secret
 aws secretsmanager create-secret \
-  --name kaax-api-secrets \
-  --description "Kaax API credentials" \
+  --name kaax-auth-secrets \
+  --description "Kaax Auth API credentials" \
   --secret-string "$SECRET_VALUE" \
   --region ${AWS_REGION:-us-east-1} 2>/dev/null
 
@@ -26,9 +26,9 @@ aws secretsmanager create-secret \
 if [ $? -ne 0 ]; then
   echo "Secret already exists, updating..."
   aws secretsmanager update-secret \
-    --secret-id kaax-api-secrets \
+    --secret-id kaax-auth-secrets \
     --secret-string "$SECRET_VALUE" \
     --region ${AWS_REGION:-us-east-1}
 fi
 
-echo "✅ Secret created/updated: kaax-api-secrets"
+echo "✅ Secret created/updated: kaax-auth-secrets"

@@ -15,7 +15,7 @@ export class KaaxApiStack extends cdk.Stack {
     const secret = secretsmanager.Secret.fromSecretNameV2(
       this,
       "KaaxSecret",
-      "kaax-api-secrets"
+      "kaax-auth-secrets"
     );
 
     // Lambda function

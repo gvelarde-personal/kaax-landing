@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "dotenv -e .env -- tsx watch src/dev.ts",
+    "build": "esbuild src/lambda.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/index.mjs --external:pg-native --external:@aws-sdk/* --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\"",
+    "deploy": "cd cdk && cdk deploy",
+    "synth": "cd cdk && cdk synth",
+    "db:push": "dotenv -e .env -- drizzle-kit push"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.0",
+    "drizzle-orm": "^0.39.3",
+    "drizzle-zod": "^0.7.0",
+    "hono": "^4.7.0",
+    "pg": "^8.16.3",
+    "stripe": "^20.4.0",
+    "zod": "^3.24.2",
+    "zod-validation-error": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.27",
+    "@types/pg": "^8.18.0",
+    "aws-cdk": "^2.174.4",
+    "aws-cdk-lib": "^2.174.4",
+    "constructs": "^10.4.2",
+    "dotenv-cli": "^11.0.0",
+    "drizzle-kit": "^0.31.8",
+    "esbuild": "^0.24.2",
+    "tsx": "^4.20.4",
+    "typescript": "5.6.3"
+  },
+  "overrides": {
+    "drizzle-kit": {
+      "@esbuild-kit/esm-loader": "npm:tsx@^4.20.4"
+    }
+  }
+}

@@ -52,6 +52,13 @@
 ## 🚧 Required Manual Steps
 
 ### 1. Install Dependencies
+
+#### Opción A: Con Yarn (Recomendado - Más rápido)
+```bash
+yarn
+```
+
+#### Opción B: Con npm
 ```bash
 npm install
 ```

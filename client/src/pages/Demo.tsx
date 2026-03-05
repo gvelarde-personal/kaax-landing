@@ -402,23 +402,20 @@ export default function Demo() {
               Así de fácil
             </p>
             <p className="text-zinc-400 text-sm mb-8">¿Listo para tener tu propio agente de IA?</p>
-            <div className="relative inline-flex">
-              <span className="absolute inset-0 rounded-full bg-primary opacity-30 animate-ping" />
-              <a
-                href={import.meta.env.VITE_CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="button-cta-bottom"
+            <a
+              href={import.meta.env.VITE_CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="button-cta-bottom"
+            >
+              <Button
+                size="lg"
+                className="animate-soft-pulse bg-primary text-black hover:bg-primary/90 font-semibold px-8 group"
               >
-                <Button
-                  size="lg"
-                  className="relative bg-primary text-black hover:bg-primary/90 font-semibold px-8 group"
-                >
-                  Agendar demostración real
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </a>
-            </div>
+                Agendar demostración real
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </a>
           </div>
         </div>
       </main>

@@ -3,8 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertLeadSchema } from "@shared/schema";
-import { type LeadInput } from "@shared/routes";
+import { insertLeadSchema, type LeadInput } from "@/types";
 import { useCreateLead } from "@/hooks/use-leads";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -37,9 +36,11 @@ export default function Home() {
   const [checkoutName, setCheckoutName] = useState("");
   const { toast } = useToast();
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://auth.kaax.ai";
+
   const { mutate: startCheckout, isPending: isCheckoutPending } = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/stripe/create-checkout", {
+      const res = await apiRequest("POST", `${API_URL}/stripe/create-checkout`, {
         customerEmail: checkoutEmail,
         customerName: checkoutName,
       });

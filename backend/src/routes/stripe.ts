@@ -4,6 +4,51 @@ import { storage } from "../lib/storage";
 
 const app = new Hono();
 
+// POST /stripe/create-checkout - Create Stripe Checkout session
+app.post("/create-checkout", async (c) => {
+  try {
+    const body = await c.req.json();
+    const { customerEmail, customerName } = body;
+
+    if (!customerEmail) {
+      return c.json({ message: "customerEmail is required" }, 400);
+    }
+
+    const priceId = isProd()
+      ? process.env.STRIPE_PRICE_ID_PROD
+      : process.env.STRIPE_PRICE_ID;
+
+    if (!priceId) {
+      console.error("STRIPE_PRICE_ID not configured");
+      return c.json({ message: "Payment configuration error" }, 500);
+    }
+
+    const frontendUrl = process.env.FRONTEND_URL || "https://kaax.ai";
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      customer_email: customerEmail,
+      metadata: {
+        customerName: customerName || "",
+      },
+      success_url: `${frontendUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${frontendUrl}`,
+    });
+
+    return c.json({ url: session.url });
+  } catch (error: any) {
+    console.error("Error creating checkout session:", error);
+    return c.json({ message: error.message || "Failed to create checkout" }, 500);
+  }
+});
+
 // POST /stripe/webhook - Handle Stripe webhooks
 app.post("/webhook", async (c) => {
   const body = await c.req.text();

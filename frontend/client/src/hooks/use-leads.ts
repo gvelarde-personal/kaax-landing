@@ -1,28 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, buildUrl, type LeadInput, type LeadUpdateInput } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+import { type LeadInput, type LeadUpdateInput, type Lead, insertLeadSchema, updateLeadSchema } from "@/types";
 
-// Helper to safely parse JSON responses
-function parseWithLogging<T>(schema: z.ZodSchema<T>, data: unknown, label: string): T {
-  const result = schema.safeParse(data);
-  if (!result.success) {
-    console.error(`[Zod] ${label} validation failed:`, result.error.format());
-    // For runtime safety, we'll return the raw data if it's a custom Zod type that always passes, 
-    // but log it anyway just in case the schema gets stricter.
-    return data as T; 
-  }
-  return result.data;
-}
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://auth.kaax.ai";
 
 export function useLeads() {
-  return useQuery({
-    queryKey: [api.leads.list.path],
+  return useQuery<Lead[]>({
+    queryKey: [`${API_URL}/leads`],
     queryFn: async () => {
-      const res = await fetch(api.leads.list.path, { credentials: "include" });
+      const res = await fetch(`${API_URL}/leads`, { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch leads");
-      const data = await res.json();
-      return parseWithLogging(api.leads.list.responses[200], data, "leads.list");
+      return await res.json();
     },
   });
 }
@@ -33,14 +21,14 @@ export function useCreateLead() {
 
   return useMutation({
     mutationFn: async (data: LeadInput) => {
-      const validated = api.leads.create.input.parse(data);
-      const res = await fetch(api.leads.create.path, {
-        method: api.leads.create.method,
+      const validated = insertLeadSchema.parse(data);
+      const res = await fetch(`${API_URL}/leads`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validated),
         credentials: "include",
       });
-      
+
       if (!res.ok) {
         if (res.status === 400) {
           const error = await res.json();
@@ -51,7 +39,7 @@ export function useCreateLead() {
       return await res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [api.leads.list.path] });
+      queryClient.invalidateQueries({ queryKey: [`${API_URL}/leads`] });
     },
     onError: (err) => {
       toast({
@@ -69,20 +57,19 @@ export function useUpdateLead() {
 
   return useMutation({
     mutationFn: async ({ id, ...updates }: { id: number } & LeadUpdateInput) => {
-      const validated = api.leads.update.input.parse(updates);
-      const url = buildUrl(api.leads.update.path, { id });
-      const res = await fetch(url, {
-        method: api.leads.update.method,
+      const validated = updateLeadSchema.parse(updates);
+      const res = await fetch(`${API_URL}/leads/${id}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validated),
         credentials: "include",
       });
-      
+
       if (!res.ok) throw new Error("Failed to update lead");
       return await res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [api.leads.list.path] });
+      queryClient.invalidateQueries({ queryKey: [`${API_URL}/leads`] });
       toast({ title: "Lead updated successfully" });
     },
     onError: (err) => {
@@ -101,15 +88,14 @@ export function useDeleteLead() {
 
   return useMutation({
     mutationFn: async (id: number) => {
-      const url = buildUrl(api.leads.delete.path, { id });
-      const res = await fetch(url, {
-        method: api.leads.delete.method,
+      const res = await fetch(`${API_URL}/leads/${id}`, {
+        method: "DELETE",
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to delete lead");
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [api.leads.list.path] });
+      queryClient.invalidateQueries({ queryKey: [`${API_URL}/leads`] });
       toast({ title: "Lead deleted" });
     },
     onError: (err) => {

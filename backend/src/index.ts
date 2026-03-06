@@ -11,10 +11,25 @@ app.use("*", logger());
 app.use(
   "*",
   cors({
-    origin: process.env.FRONTEND_URL
-      ? [process.env.FRONTEND_URL]
-      : ["http://localhost:3000", "https://kaax.ai", "https://*.kaax.ai"],
+    origin: (origin) => {
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://kaax.ai",
+        "https://www.kaax.ai",
+      ];
+
+      // Allow all Cloudflare Pages domains
+      if (origin && (origin.endsWith(".pages.dev") || allowedOrigins.includes(origin))) {
+        return origin;
+      }
+
+      return allowedOrigins[0];
+    },
     credentials: true,
+    allowHeaders: ["Content-Type", "Authorization"],
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    exposeHeaders: ["Content-Length"],
+    maxAge: 600,
   })
 );
 

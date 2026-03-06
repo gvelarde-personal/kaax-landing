@@ -5,15 +5,13 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
-import { useSession, signIn, signOut } from "next-auth/react";
 import {
-  Users, CreditCard, Loader2, Trash2, Edit, MoreHorizontal, LogIn,
+  Users, CreditCard, Loader2, Trash2, Edit, MoreHorizontal,
   TrendingUp, CheckCircle2, XCircle, Clock, BadgeDollarSign, MessageCircle,
 } from "lucide-react";
 
 import { useLeads, useUpdateLead, useDeleteLead } from "@/hooks/use-leads";
-import { type Lead, type Subscription } from "@shared/schema";
-import { type LeadUpdateInput } from "@shared/routes";
+import { type Lead, type Subscription, type LeadUpdateInput } from "@/types";
 import { Logo } from "@/components/Logo";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -50,16 +48,20 @@ const SUB_STATUS_COLORS: Record<string, string> = {
   past_due: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://auth.kaax.ai";
+
 function useSubscriptions() {
   return useQuery<Subscription[]>({
-    queryKey: ["/api/subscriptions"],
+    queryKey: [`${API_URL}/subscriptions`],
+    queryFn: async () => {
+      const res = await fetch(`${API_URL}/subscriptions`, { credentials: "include" });
+      if (!res.ok) throw new Error("Failed to fetch subscriptions");
+      return await res.json();
+    },
   });
 }
 
 export default function Admin() {
-  const { data: session, status } = useSession();
-  const authLoading = status === "loading";
-  const user = session?.user;
   const { data: leads = [], isLoading: leadsLoading } = useLeads();
   const { data: subscriptions = [], isLoading: subsLoading } = useSubscriptions();
   const { mutate: updateLead, isPending: isUpdating } = useUpdateLead();
@@ -83,33 +85,6 @@ export default function Admin() {
     if (!deletingLead) return;
     deleteLead(deletingLead.id, { onSuccess: () => setDeletingLead(null) });
   };
-
-  if (authLoading) {
-    return (
-      <div className="h-screen w-full flex items-center justify-center bg-zinc-950">
-        <Loader2 className="w-10 h-10 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="h-screen w-full flex flex-col items-center justify-center bg-zinc-950 text-white p-4">
-        <Logo className="w-20 h-20 mb-8" />
-        <h1 className="text-3xl font-display font-bold mb-4">Acceso Restringido</h1>
-        <p className="text-muted-foreground mb-8 text-center max-w-md">
-          El panel de administración es privado. Por favor, inicia sesión con tu cuenta de Replit para continuar.
-        </p>
-        <Button
-          onClick={() => signIn("google")}
-          className="bg-primary hover:bg-primary/90 h-12 px-8 text-white font-bold"
-          data-testid="button-login"
-        >
-          <LogIn className="w-4 h-4 mr-2" /> Iniciar Sesión con Google
-        </Button>
-      </div>
-    );
-  }
 
   const totalLeads = leads.length;
   const newLeads = leads.filter(l => l.status === 'new').length;
@@ -150,16 +125,10 @@ export default function Admin() {
           <div className="p-4 border-t border-white/5">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold">
-                {user?.name?.[0]?.toUpperCase() || "A"}
+                A
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-medium truncate">{user?.name || "Admin"}</p>
-                <button
-                  onClick={() => signOut()}
-                  className="text-xs text-muted-foreground hover:text-white text-left"
-                >
-                  Cerrar sesión
-                </button>
+                <p className="text-sm font-medium truncate">Admin</p>
               </div>
             </div>
           </div>

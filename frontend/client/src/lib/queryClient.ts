@@ -16,7 +16,7 @@ export async function apiRequest(
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
+    // credentials: "include", // Removed - not needed for public API
   });
 
   await throwIfResNotOk(res);

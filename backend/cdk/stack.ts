@@ -22,7 +22,7 @@ export class KaaxApiStack extends cdk.Stack {
     const api = new lambda.Function(this, "KaaxAPI", {
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: "index.handler",
-      code: lambda.Code.fromAsset("../dist"),
+      code: lambda.Code.fromAsset("dist"),
       memorySize: 256,
       timeout: cdk.Duration.seconds(10),
       environment: {
@@ -41,8 +41,9 @@ export class KaaxApiStack extends cdk.Stack {
       description: "Kaax AI API",
       corsPreflight: {
         allowOrigins: [
-          process.env.FRONTEND_URL || "https://kaax.ai",
           "http://localhost:3000",
+          "https://kaax.ai",
+          "https://www.kaax.ai"
         ],
         allowMethods: [
           apigatewayv2.CorsHttpMethod.GET,
@@ -50,9 +51,10 @@ export class KaaxApiStack extends cdk.Stack {
           apigatewayv2.CorsHttpMethod.PUT,
           apigatewayv2.CorsHttpMethod.DELETE,
           apigatewayv2.CorsHttpMethod.OPTIONS,
+          apigatewayv2.CorsHttpMethod.PATCH,
         ],
         allowHeaders: ["*"],
-        allowCredentials: true,
+        allowCredentials: false,
       },
       defaultIntegration: new apigatewayv2Integrations.HttpLambdaIntegration(
         "LambdaIntegration",

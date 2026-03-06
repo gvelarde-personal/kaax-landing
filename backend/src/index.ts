@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import leadsRoutes from "./routes/leads";
 import stripeRoutes from "./routes/stripe";
@@ -8,30 +7,37 @@ const app = new Hono();
 
 // Middleware
 app.use("*", logger());
-app.use(
-  "*",
-  cors({
-    origin: (origin) => {
-      const allowedOrigins = [
-        "http://localhost:3000",
-        "https://kaax.ai",
-        "https://www.kaax.ai",
-      ];
 
-      // Allow all Cloudflare Pages domains
-      if (origin && (origin.endsWith(".pages.dev") || allowedOrigins.includes(origin))) {
-        return origin;
+// Manual CORS middleware - add headers to ALL responses
+app.use("*", async (c, next) => {
+  const origin = c.req.header("Origin");
+  const allowedOrigins = [
+    "http://localhost:3000",
+    "https://kaax.ai",
+    "https://www.kaax.ai"
+  ];
+
+  const allowOrigin = allowedOrigins.includes(origin || "") ? origin : allowedOrigins[0];
+
+  // Set CORS headers before processing request
+  c.header("Access-Control-Allow-Origin", allowOrigin);
+  c.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+  c.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  // Handle preflight
+  if (c.req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": allowOrigin,
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
       }
+    });
+  }
 
-      return allowedOrigins[0];
-    },
-    credentials: true,
-    allowHeaders: ["Content-Type", "Authorization"],
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    exposeHeaders: ["Content-Length"],
-    maxAge: 600,
-  })
-);
+  await next();
+});
 
 // Health check
 app.get("/health", (c) => {
